@@ -1,0 +1,7 @@
+Essentially, we realized our model might be out of the scope of this class, so I wanted to ask you what you think. We are trying to create an image recognition model as a CNN. It would take MRI brain scans and classify them into four classifications of tumors/no tumor.
+
+Our team was meeting last week to discuss our next steps, and I was watching some tutorials on EDA with python. The video was using numerical data, so it didn't perfectly transfer to our project. We looked at the past projects done with this dataset on Kaggle and found that it was quite different than we expected. Basically, I wanted to go over that with you, to see if this project was realistic and up to your expectations.
+
+I don't fully understand it, but it seems like the user here is using a pre-existing model and set of weights to base their model off of. Then they fine tunes the weights with some training and end up with their final model. We initially thought that there would be several input features that we would have to extrapolate from the images via pixel intensity, like smoothness, texture, etc. But that doesn't seem to be the case. Would it be a problem if we did something similar to this user? We felt it might be different than what was intended with this project.
+
+We haven't done much at all yet, only the one pager. We have a backup dataset, the mushroom identification dataset. Would it be too late to switch our focus to that dataset? Would you want a new one pager submitted? 
