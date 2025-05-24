@@ -173,6 +173,8 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+# Latex ignores
+*.pdf
 *.acn
 *.acr
 *.alg
