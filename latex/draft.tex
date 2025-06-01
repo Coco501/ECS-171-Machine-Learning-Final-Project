@@ -16,30 +16,49 @@
 
 \title{Neural Networks for Neural Tumors}
 
+% old author block
+% \author{
+% \IEEEauthorblockN{\large Joe Vogel}
+% \IEEEauthorblockA{\textit{UC Davis Computer Science} \\
+% jvogel@ucdavis.edu}
+
+% \and
+% \IEEEauthorblockN{\large Nam Nguyen}
+% \IEEEauthorblockA{\textit{UC Davis Computer Science} \\
+% ncnn@ucdavis.edu}
+
+% \and
+% \IEEEauthorblockN{\large Jonathan Mo}
+% \IEEEauthorblockA{\textit{UC Davis Computer Science} \\
+% jtnmo@ucdavis.edu}
+
+% \and
+% \IEEEauthorblockN{\large Aryan Karnwal}
+% \IEEEauthorblockA{\textit{UC Davis Computer Science} \\
+% akarnwal@ucdavis.edu}
+
+% \and
+% \IEEEauthorblockN{\large Richard Ho}
+% \IEEEauthorblockA{\textit{UC Davis Computer Science} \\
+% rdho@ucdavis.edu}
+% }
+
 \author{
-\IEEEauthorblockN{\large Joe Vogel}
-\IEEEauthorblockA{\textit{UC Davis Computer Science} \\
-jvogel@ucdavis.edu}
-
-\and
-\IEEEauthorblockN{\large Nam Nguyen}
-\IEEEauthorblockA{\textit{UC Davis Computer Science} \\
-ncnn@ucdavis.edu}
-
-\and
-\IEEEauthorblockN{\large Jonathan Mo}
-\IEEEauthorblockA{\textit{UC Davis Computer Science} \\
-jtnmo@ucdavis.edu}
-
-\and
-\IEEEauthorblockN{\large Aryan Karnwal}
-\IEEEauthorblockA{\textit{UC Davis Computer Science} \\
-akarnwal@ucdavis.edu}
-
-\and
-\IEEEauthorblockN{\large Richard Ho}
-\IEEEauthorblockA{\textit{UC Davis Computer Science} \\
-rdho@ucdavis.edu}
+\centering
+\begin{minipage}[t]{0.9\textwidth}
+  \centering
+  \begin{tabular}{ccc}
+    Joe Vogel & Nam Nguyen & Jonathan Mo \\
+    \textit{UC Davis Computer Science} & \textit{UC Davis Computer Science} & \textit{UC Davis Computer Science} \\
+    jvogel@ucdavis.edu & ncnn@ucdavis.edu & jtnmo@ucdavis.edu \\
+    \vspace{0.6em}
+  \end{tabular}
+  \begin{tabular}{cc}
+    Aryan Karnwal & Richard Ho \\
+    \textit{UC Davis Computer Science} & \textit{UC Davis Computer Science} \\
+    akarnwal@ucdavis.edu & rdho@ucdavis.edu \\
+  \end{tabular}
+\end{minipage}
 }
 
 \maketitle
@@ -83,7 +102,7 @@ The authors implemented a deeper architecture design using small kernels, with n
 
 \section{\large Dataset Description (1 page)}
 
-The dataset used for this project comes from a group of brilliant students at Savitribai Phule Pune University in India. It can be found for free on Kaggle\textsuperscript{4}. It is a well respected and reviewed dataset. The data consists of 3264 files, which are all images of MRI scans. The images are divided into four sets. There are three different tumor sets, and one set of “no tumor” scans. Considering each image in our dataset is already classified, our model's training is supervised, as opposed to unsupervised, where each image would not have an associated classification to begin with.
+The dataset used for this project comes from a group of brilliant students at Savitribai Phule Pune University in India. It can be found for free on Kaggle\textsuperscript{4}. It is a well respected and reviewed dataset. The data consists of 3264 files, which are all images of MRI scans. The images are divided into four sets. There are three different tumor types, and one set of “no tumor” scans. Considering each image in our dataset is already classified, our model's training is supervised, as opposed to unsupervised, where each image would not have an associated classification to begin with.
 
 \subsection{\large Preprocessing}
 
