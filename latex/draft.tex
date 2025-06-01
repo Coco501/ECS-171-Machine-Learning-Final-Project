@@ -113,7 +113,7 @@ Preprocessing steps might include things like image resizing, cropping, normaliz
 
 \section{\large EDA (1 page)}
 
-% image in a column
+% EXAMPLE image in a column
 % \begin{figure}[!ht]
 %     \centering
 %     \includegraphics[width=2in]{coconut.png}
@@ -121,7 +121,7 @@ Preprocessing steps might include things like image resizing, cropping, normaliz
 %     \label{test image coconut}
 % \end{figure}
 
-% image across two columns
+% EXAMPLE image across two columns
 % \begin{figure*}[!ht]
 %     \centering
 %     \includegraphics[width=3in]{coconut.png}
@@ -129,19 +129,34 @@ Preprocessing steps might include things like image resizing, cropping, normaliz
 %     \label{coconut}
 % \end{figure*}
 
+% These two won't stay in the same row
+% \begin{figure*}[!ht]
+%     \centering
+%     \includegraphics[width=1in]{ImagesPerClassTraining.png}
+%     \caption{\large Images in the training dataset}
+%     \label{Number of images per class in the training dataset}
+% \end{figure*}
+
+% \begin{figure*}[!ht]
+%     \centering
+%     \includegraphics[width=1in]{ImagesPerClassTesting.png}
+%     \caption{\large Images in the testing dataset}
+%     \label{Number of images per class in the testing dataset}
+% \end{figure*}
+
+% Both figures in one row
 \begin{figure*}[!ht]
     \centering
-    \includegraphics[width=4in]{ImagesPerClassTraining.png}
-    \caption{\large Number of images per class in the training dataset}
-    \label{Number of images per class in the training dataset}
+    \includegraphics[width=0.49\textwidth]{ImagesPerClassTraining.png}
+    \hfill
+    \includegraphics[width=0.49\textwidth]{ImagesPerClassTesting.png}
+    \caption{\large Number of images per class in the training (left) and testing (right) datasets}
+    \label{fig:images-per-class}
 \end{figure*}
 
-\begin{figure*}[!ht]
-    \centering
-    \includegraphics[width=4in]{ImagesPerClassTesting.png}
-    \caption{\large Number of images per class in the testing dataset}
-    \label{Number of images per class in the testing dataset}
-\end{figure*}
+As we can see in Figure 1 (left), there is an even distribution of images among each class (~825), except for the no tumor class (395). This is because the images without tumors have much less variance. It should be much easier for the model to detect tumor vs no tumor, so we do not expect the lower number of images in the no tumor class to have a negative effect on the model's ability to classify images as such. However, if we do see poor results in that classification specifically, we can try changing all classes to train on 395 images, to see if that helps with the class-specific overfitting.
+
+In our test dataset seen in Figure 1 (right), we have a much more uneven distribution among each class. This of course won't affect our model's ability, since it is not being trained on this data, but some results could be skewed considering the relatively low number of pituitary images. It could be useful to test against more pituitary imagery to ensure the model can handle all variations of scans. We could perform data augmentation and create more data by rotating, zooming, and flipping our existing data. Testing against more data could give us more confidence in our model, if scores remain high.
 
 \begin{figure*}[!ht]
     \centering
@@ -150,15 +165,11 @@ Preprocessing steps might include things like image resizing, cropping, normaliz
     \label{Dimensions of images in the dataset}
 \end{figure*}
 
-As we can see in Figure 1, there is an even distribution of images among each class (~825), except for the no tumor class (395). This is because the images without tumors have much less variance. It should be much easier for the model to detect tumor vs no tumor, so we do not expect the lower number of images in the no tumor class to have a negative effect on the model's ability to classify images as such. However, if we do see poor results in that classification specifically, we can try changing all classes to train on 395 images, to see if that helps with the class-specific overfitting.
-
-In our test dataset seen in Figure 2, we have a much more uneven distribution among each class. This of course won't affect our model's ability, since it is not being trained on this data, but some results could be skewed considering the relatively low number of pituitary images. It could be useful to test against more pituitary imagery to ensure the model can handle all variations of scans. We could perform data augmentation and create more data by rotating, zooming, and flipping our existing data. Testing against more data could give us more confidence in our model, if scores remain high.
-
-We can see in Figure 3 that our dataset is comprised of images of varying sizes. There seems to be a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image pre-processing to convert all images into the same size so the model has consistent input. A common image size is 256x256.
+We can see in Figure 2 that our dataset is comprised of images of varying sizes. There seems to be a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image pre-processing to convert all images into the same size so the model has consistent input. A common image size is 256x256.
 
 \section{\large Methodology (1-2 pages)}
 
-\subsection{Feature Selection}
+\subsection{\large Feature Selection}
 As mentioned in our dataset description, we don't have labels for our input features like a numerical dataset would have. We only have our images, which are technically a bunch of pixel intensity values, but it means we can't select certain features to train our dataset on. Instead, we can perform some image preprocessing and hyperparameter tuning to increase our model's accuracy.
 
 If we look at Figure 3 again, we see all of our images have different dimensions.  As a preprocessing step, we will resize them all to be 256x256 pixels, so that our model has consistent input. We then normalize each pixel's value from its 3-channel RGB form. The resizing step is not as simple as it sounds though, we must be careful because shrinking or enlarging our images can create noise in our data. Based on future results, we might try a few different image sizes to see which is best. 
@@ -179,16 +190,25 @@ To improve upon our first model, we'll apply k-fold cross validation and tune hy
 
 
 \section{\large Experimental Results (2 pages)}
+Talk about trying three different models, different pretrained models like ResNet, (the other one you tried first Nam I forgot what it was)
+
+Talk about fine-tuning, grid search for hyperparameter fine-tuning, etc.
+
+Nam, Elaborate on this: "Alright guys, I finally figured out the problem. I've been using different pre-trained models but keep ending up with a lot of false negatives for the class glioma. I reviewed another notebook using the same dataset. Comparing it with our reference notebook, I notice that they both initially combined the training and testing folders, shuffled and split again. On the other hand, I'd been using the dataset as it is split on Kaggle. I believe there must be significant patterns in the testing folders on Kaggle that are not present in the training ones, especially the glioma-tumor class. So, merging them together and splitting again is the optimal solution here. Btw, I also decided to use Keras Function API instead of Sequential API (still same network architecture) and it turned out to be slightly better. I run the model several times and the accuracy is averagely around 92\% to 95\%"
 
 \section{\large Evaluation (1-2 pages)}
+Include all 3 models and their confusion matrix results, do not include the actual confusion matrix, only the f1 scores, precision, etc. 
 
 \section{\large Conclusion (1/2 page)}
+Talk about how we chose CNN as our final model and reiterate how it performs
 
 \section{\large Our Team (1 page)}
-The link to our GitHub repository for this project can be foun at: https://github.com/Coco501/Neural-Networks-for-Neural-Tumors
+The link to our GitHub\textsuperscript{8} repository for this project can be found in the references of this report.
 
-project roadmap? 
+project roadmap? Reference the first one pager outline assignment we did on google doc
 %TODO --- roadmap?
+\subsection{\large Demonstration}
+include youtube video of our demo
 
 \subsection{\large Roles and Contributions}
 
@@ -224,6 +244,10 @@ A. M. Hasan, H. A. Jalab, F. Meziane, H. Kahtan, and A. S. Al-Ahmad, “Combinin
 
 \bibitem{Meier2020}
 R. Meier, A. P. de Mortanges, R. Wiest, and U. Knecht, “Exploratory analysis of qualitative MR imaging features for the differentiation of glioblastoma and brain metastases,” *Front. Oncol.*, vol. 10, p. 581037, 2020.
+
+\bibitem{Vogel2025}
+J. Vogel, N. Nguyen, J. Mo, A. Karnwal, R. Ho, "Neural Networks for Neural Tumors". GitHub. https://github.com/Coco501/Neural-Networks-
+for-Neural-Tumors
 
 \end{thebibliography}
 
