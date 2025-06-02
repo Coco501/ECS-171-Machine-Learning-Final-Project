@@ -64,7 +64,7 @@
 \maketitle
 
 \begin{abstract}
-This report documents the process of creating a machine learning model that classifies brain tumors using MRI brain scan imagery. This project saw the creation of three successful models using the following algorithms: Convolutional Neural Network, Support Vector Machine, and Random Forest. 
+This report documents the process of creating a machine learning model that classifies brain tumors given MRI brain scan imagery. This project saw the creation of three successful models using the following algorithms: Convolutional Neural Network, Support Vector Machine, and Random Forest. 
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -73,12 +73,13 @@ Brain tumor classification, Convolutional Neural Network (CNN), MRI brain imager
 
 \large 
 \section{\large Introduction (Front page)}
-As a team of five young computer science students with no prior machine learning experience, we ambitously decided to tackle the real world challenge of tumor classification for our \textit{ECS 171 - Machine Learning} final project at UC Davis. Through hours and hours of research and trial and error, we learned a lot, and we have a lot to share. 
+As a team of five young computer science students with no prior machine learning experience, we ambitously decided to tackle the real world challenge of brain tumor classification for our \textit{ECS 171 - Machine Learning} final project at UC Davis. Through hours and hours of research and trial and error, we learned a lot, and we have a lot to share. 
 
 We hope this report serves not only as an informative summary of our findings, but also as motivation for your own projects. We faced many challenges during this project, but in the end created something we are all very proud of, despite our lack of experience.
 
-
 \subsection{\large Motivation}
+
+Brain tumors make up for... reference 9% TODO
 
 Hundreds of thousands of MRI brain scans are performed every day. With the scans being so intricate, it can sometimes be hard for even a trained professional to determine whether or not a patient has a brain tumor, and even harder to tell which kind. 
 
@@ -91,13 +92,15 @@ A classification machine learning model is a great approach to this problem. Usi
 
 \subsection{\large Brain Tumor Classification in MRI Image Using Convolutional Neural Network$^{1}$}
 
-Khan et al. (2021) examine convolutional neural network models for brain tumor classification, reporting classification accuracies ranging from 80\% to 98\%. The authors highlight two primary challenges in training such models: (1) the scarcity of accurately labeled data, which increases training complexity and cost, and (2) inconsistency in image dimensions, given that CNNs require fixed-size input. Their dataset is partitioned into training, validation, and testing sets, serving model training, hyperparameter tuning, and final evaluation, respectively. Image pre-processing is performed using Canny Edge Detection, an open-source computer vision technique. To address the limited dataset size, the authors employ data augmentation methods such as flipping, rotation, and brightness adjustments to enhance variability. The model utilizes the ReLU activation function and stochastic gradient descent for optimization.
+In this article from 2021, authors Khan et al. examine convolutional neural network models for brain tumor classification, reporting classification accuracies ranging from 80\% to 98\%. The authors highlight two primary challenges in training such models: (1) the scarcity of accurately labeled data, which increases training complexity and cost, and (2) inconsistency in image dimensions, given that CNNs require fixed-size input. Their dataset is partitioned into training, validation, and testing sets, serving model training, hyperparameter tuning, and final evaluation, respectively. Image pre-processing is performed using Canny Edge Detection, an open-source computer vision technique. To address the limited dataset size, the authors employ data augmentation methods such as flipping, rotation, and brightness adjustments to enhance variability. The model utilizes the ReLU activation function and stochastic gradient descent for optimization.
 
 Given our limited computational resources, we plan to utilize a pre-trained model. The eight-layer architecture discussed in the paper provides a useful baseline. The pre-processing techniques mentioned are also great starting points for us, and let us know what we should look out for. Furthermore, we intend to implement data augmentation techniques to improve generalization on our small dataset. The use of ReLU and stochastic gradient descent aligns well with our current understanding, and we aim to assess their impact on our model's performance.
 
 \subsection{\large A Deep CNN Based Multi-Class Classification of Alzheimer's Disease Using MRI$^{2}$}
 
-In this article, Farooq, Anwar, Awais, and Rehman demonstrate their implementation of a 4-way classifier to classify different types of Alzheimer's disease, which is similar to our project since we are classifying our data into 4 sets. The authors began with data preprocessing and they utilized a technique known as skull stripping, which is the process of removing non-brain tissues like the skull or fat from MRI images. Since our data set consists of MRI images, we can implement skull stripping as well to improve signal-to-noise ratio and reduce input complexity, so it could help handle overfitting. Additionally, the article mentions the utilization of data augmentation to increase the data set; they simply flipped the images along the horizontal axis, which is valid due to the left and right symmetry of the brain. This method increased their dataset from 355 MRI volumes to 38024 images. We can implement the same method in our project because increasing the sample size can combat overfitting, making our model more accurate.
+In this article, Farooq, Anwar, Awais, and Rehman demonstrate their implementation of a four-way Alzheimer's disease classifier. Considering their model also takes MRI imagery as input and has four class target labels, we can learn a lot from their experiments. The authors began their model development with data preprocessing and a technique known as skull stripping, which is the process of removing non-brain tissues like the skull or fat from MRI imagery. We could implement skull stripping in our model to improve the signal-to-noise ratio and reduce input complexity, which could help against overfitting. 
+
+Additionally, the article mentions the utilization of data augmentation to increase the data set; they simply flipped the images along the horizontal axis, which is valid due to the left and right symmetry of the brain. This method increased their dataset from 355 MRI volumes to 38024 images. We can implement the same method in our project because increasing the sample size can combat overfitting, making our model more accurate.
 
 \subsection{\large Brain Tumor Classification Using Convolutional Neural Networks$^{3}$}
 
@@ -108,7 +111,7 @@ The authors implemented a deeper architecture design using small kernels, with n
 
 \section{\large Dataset Description (1 page)}
 
-The dataset used for this project comes from a group of brilliant students at Savitribai Phule Pune University in India. It can be found for free on Kaggle\textsuperscript{4}. It is a well respected and reviewed dataset. The dataset consists of 3264 files, which are all images of MRI scans. The images are divided into four categories. There are three different tumor types, and one set of “no tumor” scans. Because each image in our dataset is already classified, our model's training is considered supervised, as opposed to unsupervised, where each training image would not have an associated classification.
+The dataset used for this project comes from a group of brilliant students at Savitribai Phule Pune University in India. It is an open source dataset that can be found for free on Kaggle\textsuperscript{4}. It is a well respected and reviewed dataset. The dataset consists of 3264 labeled MRI scan images. The images are divided into four categories. There are three different tumor types, and one set of “no tumor” scans. Because each image in our dataset is already classified, our model's training is considered supervised, as opposed to unsupervised, where each training image would not have an associated classification. An unsupervised model would require a much different approach, most likely using different algorithms.
 
 \subsection{\large Preprocessing}
 
@@ -156,7 +159,7 @@ Preprocessing steps might include things like image resizing, cropping, normaliz
     \includegraphics[width=0.49\textwidth]{ImagesPerClassTraining.png}
     \hfill
     \includegraphics[width=0.49\textwidth]{ImagesPerClassTesting.png}
-    \caption{\large Number of images per class in the training (left) and testing (right) datasets}
+    \caption{\large The dataset has a consistent number of training images across classes, except for "no tumor". This should not be an issue because "no tumor" imagery has much less variance. For testing, the distribution of images is more varied, but this does not affect model performance, since the model is not trained on this data at all.}
     \label{fig:images-per-class}
 \end{figure*}
 
@@ -167,7 +170,7 @@ In our test dataset seen in Figure 1 (right), we have a much more uneven distrib
 \begin{figure*}[!ht]
     \centering
     \includegraphics[width=4in]{ImageDimensions.png}
-    \caption{\large Dimensions of the images in the dataset}
+    \caption{\large It is clear to see the images in the dataset are of many varying dimensions. We do see higher densities around the 200x200 and 500x500 dimensions, though. Regardless, such variation means image preprocessing and resizing is necessary before training.}
     \label{Dimensions of images in the dataset}
 \end{figure*}
 
@@ -268,6 +271,9 @@ R. Meier, A. P. de Mortanges, R. Wiest, and U. Knecht, “Exploratory analysis o
 \bibitem{Vogel2025}
 J. Vogel, N. Nguyen, J. Mo, A. Karnwal, R. Ho, "Neural Networks for Neural Tumors". GitHub. https://github.com/Coco501/Neural-Networks-
 for-Neural-Tumors
+
+\bibitem{NBTS2022}
+Brain tumor facts. National Brain Tumor Society. (2024, February 20). https://braintumor.org/brain-tumors/about-brain-tumors/brain-tumor-facts/ 
 
 \end{thebibliography}
 
