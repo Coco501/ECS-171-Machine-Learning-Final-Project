@@ -72,22 +72,28 @@ Brain tumor classification, Convolutional Neural Network (CNN), MRI brain imager
 \end{IEEEkeywords}
 
 \large 
-\section{\large Introduction (1-2 pages)}
-Hundreds of thousands of MRI brain scans are performed every day. With MRI scans being so intricate, it can sometimes be hard for even a trained professional to determine whether or not a patient has a brain tumor, and even harder to tell which kind. 
+\section{\large Introduction (Front page)}
+As a team of five young computer science students with no prior machine learning experience, we ambitously decided to tackle the real world challenge of tumor classification for our \textit{ECS 171 - Machine Learning} final project at UC Davis. Through hours and hours of research and trial and error, we learned a lot, and we have a lot to share. 
+
+We hope this report serves not only as an informative summary of our findings, but also as motivation for your own projects. We faced many challenges during this project, but in the end created something we are all very proud of, despite our lack of experience.
+
 
 \subsection{\large Motivation}
-Having a tool that could detect and identify tumors within seconds, and with high accuracy, would save a lot of time and money. Not to mention the impact it would have on developing nations who might not have as many specially trained doctors that can readily perform MRI analysis. Early detection is absolutely key to diagnosing and treating these tumors.
+
+Hundreds of thousands of MRI brain scans are performed every day. With the scans being so intricate, it can sometimes be hard for even a trained professional to determine whether or not a patient has a brain tumor, and even harder to tell which kind. 
+
+Having a tool that could detect and identify tumors within seconds, and with high accuracy, would save a lot of time and money. Not to mention the impact it would have on developing nations who might not have as many specially trained doctors that can readily perform MRI analysis. With lives on the line, early detection is absolutely key to diagnosing and treating these tumors.
 
 \subsection{\large Approach}
-A classification machine learning model is the perfect solution to this problem. Using a convolutional neural network and an image dataset, we can train a model to accuractely classify brain tumors. With its complex neural structure, such a model can detect nuances in the scans that are otherwise unnoticeable to the human eye. This project used a dataset that focused on three brain tumor types: glioma, meningioma, pituitary. The model will also be able to predict scans that have "no tumor". Given an image of an MRI brain scan containing one of the four classifications, the model should predict the tumor class with over 95\% accuracy.
+A classification machine learning model is a great approach to this problem. Using a convolutional neural network and an image dataset, we can train a model to accuractely classify brain tumors. With its complex neural structure, such a model can detect nuances and patterns in the scans that are otherwise hard to spot. This project used a dataset that focused on three brain tumor types: glioma, meningioma, pituitary. Along with the three tumor types, the model should also be able to classify scans as "no tumor". The aim for this model was to predict tumor classes with over 95\% accuracy.
 
-\section{\large Literature Review (1/2 page)}
+\section{\large Literature Review (Complete)}
 
 \subsection{\large Brain Tumor Classification in MRI Image Using Convolutional Neural Network$^{1}$}
 
-Khan et al. (2021) examine convolutional neural network (CNN) models for brain tumor classification, reporting classification accuracies ranging from 80\% to 98\%. The authors highlight two primary challenges in training such models: (1) the scarcity of accurately labeled data, which increases training complexity and cost, and (2) inconsistency in image dimensions, given that CNNs require fixed-size input. Their dataset is partitioned into training, validation, and testing sets, serving model training, hyperparameter tuning, and final evaluation, respectively. Image pre-processing is performed using Canny Edge Detection, an open-source computer vision technique. To address the limited dataset size, the authors employ data augmentation methods including flipping, rotation, and brightness adjustments to enhance variability. The model utilizes the ReLU activation function and stochastic gradient descent (SGD) for optimization.
+Khan et al. (2021) examine convolutional neural network models for brain tumor classification, reporting classification accuracies ranging from 80\% to 98\%. The authors highlight two primary challenges in training such models: (1) the scarcity of accurately labeled data, which increases training complexity and cost, and (2) inconsistency in image dimensions, given that CNNs require fixed-size input. Their dataset is partitioned into training, validation, and testing sets, serving model training, hyperparameter tuning, and final evaluation, respectively. Image pre-processing is performed using Canny Edge Detection, an open-source computer vision technique. To address the limited dataset size, the authors employ data augmentation methods such as flipping, rotation, and brightness adjustments to enhance variability. The model utilizes the ReLU activation function and stochastic gradient descent for optimization.
 
-Given our limited computational resources, we plan to utilize a pre-trained model. The eight-layer architecture discussed in the paper provides a useful baseline. We are also considering Canny Edge Detection for pre-processing, as suggested by the authors. Furthermore, we intend to implement data augmentation techniques to improve generalization on our small dataset. The use of ReLU and SGD aligns well with our current understanding, and we aim to assess their impact on our model’s performance.
+Given our limited computational resources, we plan to utilize a pre-trained model. The eight-layer architecture discussed in the paper provides a useful baseline. The pre-processing techniques mentioned are also great starting points for us, and let us know what we should look out for. Furthermore, we intend to implement data augmentation techniques to improve generalization on our small dataset. The use of ReLU and stochastic gradient descent aligns well with our current understanding, and we aim to assess their impact on our model's performance.
 
 \subsection{\large A Deep CNN Based Multi-Class Classification of Alzheimer's Disease Using MRI$^{2}$}
 
@@ -95,21 +101,20 @@ In this article, Farooq, Anwar, Awais, and Rehman demonstrate their implementati
 
 \subsection{\large Brain Tumor Classification Using Convolutional Neural Networks$^{3}$}
 
-In their 2018 paper, Seetha and Raja demonstrate the effectiveness of Convolutional Neural Networks for automatic brain tumor classification using MRI images. Their proposed CNN-based classification approach achieves an impressive 97.5\% accuracy rate while maintaining low computational complexity compared to other methods. This could potentially be a performance target we should set on our own model since they used a similar model to us. This research is directly relevant to our project as we're also developing a CNN to classify brain MRI images into four categories. Their high accuracy rate sets a benchmark we should aspire to, while their focus on computational efficiency aligns with our resource constraints. 
+In this publication, authors Seetha and Raja demonstrate the effectiveness of convolutional neural networks for brain tumor classification. Their proposed CNN-based classification approach achieves an impressive 97.5\% accuracy rate while maintaining low computational complexity compared to other methods. Seeing such a high accuracy be achieved is both inspiring and motivating for us. Considering their model also predicts four tumor types, their high accuracy rate sets a benchmark we should aspire to, and their focus on computational efficiency aligns with our resource constraints. 
 
-The authors implemented a deeper architecture design using small kernels, with neuron weights intentionally kept small to optimize performance. Their experimental results demonstrated that their CNN model outperformed other state-of-the-art methods in both accuracy and efficiency. Like our approach, they used a dataset containing various brain MRI scans and faced similar challenges with image preprocessing. Their optimization of kernel size and weight parameters offers valuable insights for our model development. Additionally, our exploration of data augmentation techniques, as mentioned in our mid-quarter report, aligns with common practices in this domain. Given that our initial prototype showed signs of overfitting (92.56\% training accuracy but only 42.13\% testing accuracy), we should consider implementing some of their architectural decisions regarding smaller kernels and weight optimization, while continuing with our planned cross-validation and transfer learning approaches to improve generalization.
+The authors implemented a deeper architecture design using small kernels, with neuron weights intentionally kept small to optimize performance. Their experimental results demonstrated that their CNN model outperformed other state-of-the-art methods in both accuracy and efficiency. Like our approach, they used a dataset containing various brain MRI scans and faced similar challenges with image preprocessing. Their optimization of kernel size and weight parameters offers valuable insights for our model development. Given that our initial prototype showed signs of overfitting (93\% training accuracy with 42\% testing accuracy), we should consider implementing some of the suggested architectural decisions regarding smaller kernels and weight optimizations, while continuing with our planned transfer learning approach to improve generalization.
 
 
 \section{\large Dataset Description (1 page)}
 
-The dataset used for this project comes from a group of brilliant students at Savitribai Phule Pune University in India. It can be found for free on Kaggle\textsuperscript{4}. It is a well respected and reviewed dataset. The data consists of 3264 files, which are all images of MRI scans. The images are divided into four sets. There are three different tumor types, and one set of “no tumor” scans. Considering each image in our dataset is already classified, our model's training is supervised, as opposed to unsupervised, where each image would not have an associated classification to begin with.
+The dataset used for this project comes from a group of brilliant students at Savitribai Phule Pune University in India. It can be found for free on Kaggle\textsuperscript{4}. It is a well respected and reviewed dataset. The dataset consists of 3264 files, which are all images of MRI scans. The images are divided into four categories. There are three different tumor types, and one set of “no tumor” scans. Because each image in our dataset is already classified, our model's training is considered supervised, as opposed to unsupervised, where each training image would not have an associated classification.
 
 \subsection{\large Preprocessing}
 
-Due to the non-numerical nature of image datasets, our input features come in a different form than they normally would with a numerical dataset. Instead of having features such as 'age', 'blood pressure', and so on, we just have an image. Technically, the image is a bunch of numbers (pixel intensities), but you get the idea. We don't really get to choose which features to train our model on. Instead, things like image preprocessing and model hyperparameters are key to training an accurate model.
+Due to the non-numerical nature of image datasets, our input features come in a different form than they normally would with a numerical dataset. Instead of having numerically represented features such as 'age', 'blood pressure', and so on, our dataset only has images. Technically, each image is a set of numbers (pixel intensities), but the idea remains. We don't really have a standard feature selection process, or get to choose which features to train our model on. Instead, things like image preprocessing and model hyperparameters are key to training an accurate model.
 
 Preprocessing steps might include things like image resizing, cropping, normalization, and data augmentation (rotating, flipping, zooming, etc.). We can even consider techniques like 'skull stripping', used to isolate only the brain, since we do not care about anything else in the scan.
-
 
 \section{\large EDA (1 page)}
 
@@ -145,6 +150,7 @@ Preprocessing steps might include things like image resizing, cropping, normaliz
 % \end{figure*}
 
 % Both figures in one row
+% TODO: Move these to be under EDA in the right spots
 \begin{figure*}[!ht]
     \centering
     \includegraphics[width=0.49\textwidth]{ImagesPerClassTraining.png}
@@ -154,9 +160,9 @@ Preprocessing steps might include things like image resizing, cropping, normaliz
     \label{fig:images-per-class}
 \end{figure*}
 
-As we can see in Figure 1 (left), there is an even distribution of images among each class (~825), except for the no tumor class (395). This is because the images without tumors have much less variance. It should be much easier for the model to detect tumor vs no tumor, so we do not expect the lower number of images in the no tumor class to have a negative effect on the model's ability to classify images as such. However, if we do see poor results in that classification specifically, we can try changing all classes to train on 395 images, to see if that helps with the class-specific overfitting.
+As we can see in Figure 1 (left), there is an even distribution of images among each class (~825), except for the no tumor class (395). This is because the images without tumors have much less variance. We expect it to be much easier for the model to detect "no tumor", and we do not think the lower number of images in the "no tumor" class will have a negative effect on the model's ability to classify images as such. However, if we do see poor results in that classification specifically, we can try changing all classes to train on 395 images, to see if that helps with the class-specific overfitting. Additionally we could also focus our data augmentation on the "no tumor" class, bringing its number of images up to the others.
 
-In our test dataset seen in Figure 1 (right), we have a much more uneven distribution among each class. This of course won't affect our model's ability, since it is not being trained on this data, but some results could be skewed considering the relatively low number of pituitary images. It could be useful to test against more pituitary imagery to ensure the model can handle all variations of scans. We could perform data augmentation and create more data by rotating, zooming, and flipping our existing data. Testing against more data could give us more confidence in our model, if scores remain high.
+In our test dataset seen in Figure 1 (right), we have a much more uneven distribution among each class. This of course won't affect our model's ability, since it is not being trained on this data, but some results could be skewed considering the relatively low number of pituitary images. It could be useful to test against more pituitary imagery to ensure the model can handle all variations of scans. We could again perform data augmentation and create more pituitary data by rotating, zooming, and flipping our existing images. Testing against more data could give us more confidence in our model, if scores remain high.
 
 \begin{figure*}[!ht]
     \centering
@@ -165,16 +171,16 @@ In our test dataset seen in Figure 1 (right), we have a much more uneven distrib
     \label{Dimensions of images in the dataset}
 \end{figure*}
 
-We can see in Figure 2 that our dataset is comprised of images of varying sizes. There seems to be a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image pre-processing to convert all images into the same size so the model has consistent input. A common image size is 256x256.
+We can see in Figure 2 that our dataset is comprised of images of many varying sizes. There seems to be a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image pre-processing to convert all images into the same size so the model has consistent input. We will provide our CNN with the conventional 224x244 image dimensions.
 
 \section{\large Methodology (1-2 pages)}
 
 \subsection{\large Feature Selection}
-As mentioned in our dataset description, we don't have labels for our input features like a numerical dataset would have. We only have our images, which are technically a bunch of pixel intensity values, but it means we can't select certain features to train our dataset on. Instead, we can perform some image preprocessing and hyperparameter tuning to increase our model's accuracy.
+As mentioned in our dataset description, we don't have labels for our input features like a numerical dataset would have. We only have our images, which are technically each a set of pixel intensity values, but it means we can't select certain features to train our dataset on. Instead, we can perform some image preprocessing and hyperparameter tuning to increase our model's accuracy.
 
-If we look at Figure 3 again, we see all of our images have different dimensions.  As a preprocessing step, we will resize them all to be 256x256 pixels, so that our model has consistent input. We then normalize each pixel's value from its 3-channel RGB form. The resizing step is not as simple as it sounds though, we must be careful because shrinking or enlarging our images can create noise in our data. Based on future results, we might try a few different image sizes to see which is best. 
+Looking at Figure 3 again, we see all of our images have different dimensions. As a preprocessing step, we will resize them all to be 224x224 pixels, so that our model has consistent input.  The resizing step is not as simple as it sounds though, we must be careful because shrinking or enlarging our images can create unwanted noise in our data. After imagine resizing, we then normalize each pixel's value from its 3-channel RGB form.
 
-Our training dataset consists of 2870 MRI scans. If we want to give our model more images to train on, we can perform data augmentation. We can rotate, flip, and zoom our images to create 'artificial' data that will hopefully prevent overfitting and allow for our model to capture underlying patterns better. We also hope this will allow for our model to predict against a larger variety of testing data (i.e. rotated images). 
+Our training dataset consists of 2870 MRI scans. If we want to give our model more images to train on, we can perform data augmentation like mentioned previously. We can rotate, flip, and zoom our images to create 'artificial' data that will hopefully prevent overfitting and allow for our model to capture underlying patterns better. We also hope this will allow for our model to predict against a larger variety of testing data (i.e. rotated images). 
 
 The hyperparameters of our model are crucial to achieving a good fit. In our first iteration of the model, some of the hyperparameters we chose were as follows:
 %TODO --- fix table
@@ -184,10 +190,10 @@ We plan on fine tuning these parameters with techniques like grid search as we c
 
 \subsection{\large Early Model Development}
 
-We have already built an early prototype of a CNN model with 4 convolutional blocks, followed by fully connected layers using Keras Sequential API. We trained our model over 30 epochs, with each epoch giving us higher accuracy, peaking at 92.56\% after the last epoch. However, when tested against our testing data, the model performs quite poorly. We see an average accuracy of 42.13\%, indicating that the model is overfitting quite heavily on the training data.
+Our first early prototype was a CNN model with 4 convolutional blocks, followed by fully connected layers using the Keras Sequential API. We trained the model over 30 epochs, with each epoch giving us higher accuracy on the training data, peaking at 93\% after the last epoch. However, when performing predictions on our testing data, the model saw a big dip in performance. With an average accuracy of 42\%, our model was heavily overfitting on the training data.
 
-To improve upon our first model, we'll apply k-fold cross validation and tune hyperparameters such as dropout rate, number of layers/neurons, etc. We could start with some manual tuning, and eventually try implementing grid search to tune our hyperparameters. We also plan to use transfer learning to reduce the number of learned parameters and implicitly filter irrelevant features, which can greatly reduce overfitting risks. Going forward, we'll use PyTorch, which gives more flexibility in controlling forward pass, backpropagation, and optimization, to develop a better CNN model.
-
+% @Nam is this true? k-fold CV etc.?
+To improve upon our first model, we applied k-fold cross validation and tuned hyperparameters such as dropout rate, number of layers/neurons, etc. We implemented grid search to tune our hyperparameters. We also planned to use transfer learning to reduce the number of learned parameters and implicitly filter irrelevant features, which can greatly reduce overfitting risks. Going forward, we'd use PyTorch, which gave us more flexibility in controlling forward pass, backpropagation, and optimization, allowing us to develop a better CNN model.
 
 \section{\large Experimental Results (2 pages)}
 Talk about trying three different models, different pretrained models like ResNet, (the other one you tried first Nam I forgot what it was)
