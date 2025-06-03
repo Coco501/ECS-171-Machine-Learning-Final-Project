@@ -14,7 +14,10 @@
 % \setlength{\parskip}{0.8em}
 \begin{document}
 
-\title{Neural Networks for Neural Tumors}
+\title{Neural Networks for Neural Tumors\\
+\vspace{-0.6em}
+{\footnotesize Final Project for \textit{ECS 171 - Machine Learning} at UC Davis, with Professor Setareh Rafatirad}
+}
 
 % old author block
 % \author{
@@ -53,6 +56,7 @@
     jvogel@ucdavis.edu & ncnn@ucdavis.edu & jtnmo@ucdavis.edu \\
     \vspace{0.6em}
   \end{tabular}
+  \vspace{-0.6em}
   \begin{tabular}{cc}
     Aryan Karnwal & Richard Ho \\
     \textit{UC Davis Computer Science} & \textit{UC Davis Computer Science} \\
@@ -64,7 +68,7 @@
 \maketitle
 
 \begin{abstract}
-This report documents the process of creating a machine learning model that classifies brain tumors given MRI brain scan imagery. This project saw the creation of three successful models using the following algorithms: Convolutional Neural Network, Support Vector Machine, and Random Forest. 
+This report documents the process of creating a machine learning model that classifies brain tumors given MRI brain scan imagery. This project saw the creation of three successful models using the following algorithms: Convolutional Neural Network, Support Vector Machine, and Random Forest. Disclaimer: this project is for educational purposes only and not meant for medical use or research.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -72,18 +76,20 @@ Brain tumor classification, Convolutional Neural Network (CNN), MRI brain imager
 \end{IEEEkeywords}
 
 \large 
-\section{\large Introduction (Front page)}
-As a team of five young computer science students with no prior machine learning experience, we ambitously decided to tackle the real world challenge of brain tumor classification for our \textit{ECS 171 - Machine Learning} final project at UC Davis. Through hours and hours of research and trial and error, we learned a lot, and we have a lot to share. 
+\section{\large Introduction (Complete)}
+As a team of five young computer science students with no prior machine learning experience, we ambitously decided to tackle the real world challenge of brain tumor classification. Through hours and hours of research and trial and error, we learned a lot, and we have a lot to share. 
 
 We hope this report serves not only as an informative summary of our findings, but also as motivation for your own projects. We faced many challenges during this project, but in the end created something we are all very proud of, despite our lack of experience.
 
 \subsection{\large Motivation}
 
-Brain tumors make up for... reference 9% TODO
+As of 2025, there are more than 120 different kinds of brain tumors\textsuperscript{10}. Population statistics gathered by braintumor.org from 2015 through 2019 led researchers to estimate that in 2023, over 94,000 people would be diagnosed with a primary brain tumor\textsuperscript{9}, in America alone. 
+
+Luckily, 72\% of primary brain tumors are benign. While not completely harmless, benign tumors are much less fatal than malignant (cancerous) tumors. However, that still leaves a concerning 28\% of tumors that are malignant. Of those 28\%, an estimated 65\% of cases are proven to be fatal. Among the malignant tumors, glioblastoma is the most common, with a survival rate of only 6.9\%. These numbers are tragic, and at the moment, the only way we know to reduce them is through early detection.
 
 Hundreds of thousands of MRI brain scans are performed every day. With the scans being so intricate, it can sometimes be hard for even a trained professional to determine whether or not a patient has a brain tumor, and even harder to tell which kind. 
 
-Having a tool that could detect and identify tumors within seconds, and with high accuracy, would save a lot of time and money. Not to mention the impact it would have on developing nations who might not have as many specially trained doctors that can readily perform MRI analysis. With lives on the line, early detection is absolutely key to diagnosing and treating these tumors.
+A tool that could detect and identify brain tumors within seconds, and with high accuracy, would not only save a lot of time and money, but lives. Like mentioned above, early detection is absolutely key to increasing survival rates. Getting more people in and out of MRI machines and having their scans be automatically processed and analyzed would save countless lives. Not to mention the impact it would have on developing nations who might not have as many specially trained doctors that can readily perform MRI analysis. Luckily in the real world, hospitals are already adopting and developing these ideas. 
 
 \subsection{\large Approach}
 A classification machine learning model is a great approach to this problem. Using a convolutional neural network and an image dataset, we can train a model to accuractely classify brain tumors. With its complex neural structure, such a model can detect nuances and patterns in the scans that are otherwise hard to spot. This project used a dataset that focused on three brain tumor types: glioma, meningioma, pituitary. Along with the three tumor types, the model should also be able to classify scans as "no tumor". The aim for this model was to predict tumor classes with over 95\% accuracy.
@@ -302,6 +308,9 @@ for-Neural-Tumors
 
 \bibitem{NBTS2022}
 Brain tumor facts. National Brain Tumor Society. (2024, February 20). https://braintumor.org/brain-tumors/about-brain-tumors/brain-tumor-facts/ 
+
+\bibitem{Hopkins2025}
+Brain tumor types. Johns Hopkins Medicine. (2021, November 8). https://www.hopkinsmedicine.org/health/conditions-and-diseases/brain-tumor/brain-tumor-types 
 
 \end{thebibliography}
 
