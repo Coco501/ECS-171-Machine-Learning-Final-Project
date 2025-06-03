@@ -218,6 +218,16 @@ In classifying "no tumor", RF achieved perfect precision (1.00), which means tha
 
 For the label 'pituitary', all three models performed strongly, with CNN leading both in precision and recall (0.99 each). SVM and RF followed closely with both metrics at 0.98 and 0.97-0.98, respectively, indicating that all models are highly effective in classifying "pituitary" tumors.
 
+Unlike accuracy, which can be misleading if one class dominates the dataset, the F1 score provides a balanced view of the model's ability to correctly identify each class without favoring either false positives or false negatives. This makes it especially useful in medical imaging applications, where both types of errors can have serious implications for patient diagnosis and treatment.
+
+The F1 score of 0.93 for glioma tumors. This score indicates that while the model performs well in identifying glioma cases, there is a notable trade-off between precision and recall, particularly with slightly reduced recall. This suggests the model may occasionally misclassify glioma tumors as other types or miss them altogether.
+
+The meningioma class has the lowest F1 score among all four classes with 0.92, indicating the greatest challenge for the model in this category. The score suggests a less favorable balance between precision and recall; either the model is producing more false positives, false negatives, or both. This could be due to visual overlap with other tumor types, particularly gliomas, or due to greater variability in meningioma imaging features. 
+
+The F1 score of 0.97 for the no tumor class highlights the model’s strong performance in distinguishing healthy scans from non-healthy ones. The high precision and recall underlying this score indicate that the model rarely misclassifies healthy brains as tumors meaning there are a low amount of false positives and is also unlikely to miss the absence of a tumor or false negatives. This reliability is crucial in medical settings, where a false alarm can lead to unnecessary procedures, and a missed tumor can be life-threatening.
+
+With the highest F1 score of 0.98, the model shows excellent performance in detecting pituitary tumors. This suggests that the pituitary tumor class is the most distinct or consistently represented in the dataset, allowing the model to make confident predictions. High F1 scores for both precision and recall indicate that pituitary tumors are both correctly identified and rarely confused with other classes. This robustness may stem from more uniform imaging patterns or stronger contrast features in this tumor type.
+
 \section{\large Conclusion (1/2 page)}
 The above evaluation highlights CNN's strength in handling complex, high-dimensional image data, likely due to its hierarchical feature extraction capability. Its superior balance in both precision and recall in all tumor types supports its suitability for real-world clinical deployment, where false positives and false negatives carry significant risk.
 
