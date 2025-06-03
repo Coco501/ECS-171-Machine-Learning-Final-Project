@@ -53,7 +53,7 @@
   \begin{tabular}{ccc}
     Joe Vogel & Nam Nguyen & Jonathan Mo \\
     \textit{UC Davis Computer Science} & \textit{UC Davis Computer Science} & \textit{UC Davis Computer Science} \\
-    jvogel@ucdavis.edu & ncnn@ucdavis.edu & jtnmo@ucdavis.edu \\
+    jvogel@ucdavis.edu & ncnng@ucdavis.edu & jtnmo@ucdavis.edu \\
     \vspace{0.6em}
   \end{tabular}
   \vspace{-0.6em}
@@ -229,6 +229,35 @@ The classifier was completed by a fully connected dense layer of 128 neurons wit
 The model was trained over 20 epochs. This transition yielded a significant improvement in validation accuracy (89.20\% compared to 76.67\% in the first model) 
 while maintaining a reasonable training accuracy (92.56\%). Motivated by this encouragement, we tried to experiment with selective fine-tuning the model by unfreezing the last 30 layers of the ResNet50 pre-trained model, 
 allowing the weights of those layers to be adjusted during the backpropagation. With this technique, this model ended up with an accuracy of 97.53\%, 89.20\% and 79.19\% for the training, validation, and testing sets, respectively. At this stage, we also introduced new training practices such as learning rate management and early stopping, which shaped our training strategy for later experiments
+
+\subsection{\large Dataset Reorganization and ResNet101 upgrade}
+Motivated by the significant improvement in the previous stage, we had defined that transfer learning would be one of the most critical techniques in developing our CNN model. We decided to try different pre-trained models, 
+from simpler models such as VGG16, VGG19 to more complicated ones in ResNet and EfficientNet families. 
+Even with either layer-wise fine-tuning or standard fine-tuning techniques applied to those models, 
+we had noticed the common trait, which is a persistent underperformance on the testing test (with an accuracy around 70.00\% to 80\%) 
+despite high accuracy in validation metrics (with an accuracy around 90\% to 93\%). This discrepancy prompted us to re-evaluate our dataset. 
+Initially, we had used the dataset split provided by Kaggle. We suspected that there might have been an imbalanced presentation across classes or feature distribution in the default split. 
+To resolve this issue, we decided to recombine the training and testing sets with shuffle, then split the entire dataset with a ratio consistent with that of the default split. \ 
+
+With available computational resources, we also upgraded to ResNet101, a larger architecture compared to ResNet50, 
+and transitioned to Keras Functional API to implement our model’s architecture for better flexibility and reusability. 
+We employed the same structure as in the ResNet50 setup. The model was initially trained over 20 epochs with all ResNet101 layers frozen, yielding a training accuracy of 91.72\% and validation accuracy of 85.07\%. 
+When the fine-tuning technique was applied (with the last 40 layers unfrozen), the model reached 99.67\% training accuracy and 95.83\% validation accuracy after being trained over 4 additional epochs. 
+The model also performed much better on the testing data, yielding 96.94\% accuracy with reasonably high f1-scores for each class label. \
+
+By employing ResNet101 with layer-wise fine-tuning and a better dataset split, 
+we ended up with a highly robust CNN model with consistent performance across training, validation, and testing data.
+
+\subsection{\large Non-deep Learning Models with feature extraction}
+To develop other classifiers that incorporate algorithms rather than deep learning, we decided to employ Support Vector Machine (SVM) and Random Forest Classifier (RF) models. 
+We leveraged the fine-tuned CNN model as the feature extraction for our selected dataset in order to obtain high accuracy while keeping the training process relatively simple. 
+More specifically, we extracted the output of the GlobalAveragePooling2D layer of the fine-tuned CNN model, which includes 2048-dimensional feature vectors, and that result would serve as the input for each non-deep learning model. 
+In other words, our SVM and RF models were trained on a more semantically meaningful input space compared to raw pixels. \
+
+After conducting hyperparameter tuning, we obtained an overall accuracy of 95.66\% and 94.90\% for SVM and RF classifiers, respectively. 
+Although these two models were less efficient in distinguishing between glioma and meningioma compared to the CNN model, 
+other performance metrics were relatively high. In general, these results demonstrate that classical classifiers, when paired with feature extractors, can deliver highly competitive performance with significantly reduced training complexity
+
 \section{\large Evaluation (1-2 pages)}
 In this project, three machine learning models—Convolutional Neural Networks (CNN), Support Vector Machines (SVM), and Random Forests (RF)—were trained and evaluated. In this section, the performance of these models are assessed using standard classification metrics, including accuracy, precision, recall, and F1 score. The dataset utilized for this evaluation consists of four classes: glioma, meningioma, pituitary tumor, and no tumor.
 
