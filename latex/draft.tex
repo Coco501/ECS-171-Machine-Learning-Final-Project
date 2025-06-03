@@ -199,12 +199,30 @@ Our first early prototype was a CNN model with 4 convolutional blocks, followed 
 To improve upon our first model, we applied k-fold cross validation and tuned hyperparameters such as dropout rate, number of layers/neurons, etc. We implemented grid search to tune our hyperparameters. We also planned to use transfer learning to reduce the number of learned parameters and implicitly filter irrelevant features, which can greatly reduce overfitting risks. Going forward, we'd use PyTorch, which gave us more flexibility in controlling forward pass, backpropagation, and optimization, allowing us to develop a better CNN model.
 
 \section{\large Experimental Results (2 pages)}
-Talk about trying three different models, different pretrained models like ResNet, (the other one you tried first Nam I forgot what it was)
+Since deep learning is very efficient in detecting features from an image,
+and this characteristic is also beneficial to building other models using different base algorithms, 
+we have mainly focused on developing a Convolutional Neural Network (CNN) model with a high accuracy by iteratively refining both model architecture and training strategy. This section outlines the chronological development and iterative experimentation we have applied to finalize the set of models. 
+While the detailed performance of each model will be elaborated on in the following sections, this discussion emphasizes the architecture refinement, technical adjustments, and discoveries made during the project that improved the overall performance over time.
+\subsection{\large Baseline CNN Model}
+Our very first model was built from scratch using TensorFlow’s Sequential API. 
+The architecture consisted of 4 convolution blocks with subsequent increases in the number of filters (kernels), 
+each of which is followed by a max pooling layer helping reduce the spatial dimensions. 
+The last layers of the model are characterized by a dense layer of 128 neurons with ReLU activation and an output layer of 4 neurons with Softmax activation for multi-class classification, each of which is accompanied by a dropout layer to mitigate overfitting. \
 
-Talk about fine-tuning, grid search for hyperparameter fine-tuning, etc.
+This model was trained over 20 epochs with categorical cross-entropy as the loss function and the Adam optimizer. 
+The model ended up with a training accuracy of 92.56\% and a validation accuracy of 76.67\%. 
+When tested on the testing set, the model only gave an accuracy of 42.13\%. The significant gap between training and testing performance implies signs of overfitting.
 
-Nam, Elaborate on this: "Alright guys, I finally figured out the problem. I've been using different pre-trained models but keep ending up with a lot of false negatives for the class glioma. I reviewed another notebook using the same dataset. Comparing it with our reference notebook, I notice that they both initially combined the training and testing folders, shuffled and split again. On the other hand, I'd been using the dataset as it is split on Kaggle. I believe there must be significant patterns in the testing folders on Kaggle that are not present in the training ones, especially the glioma-tumor class. So, merging them together and splitting again is the optimal solution here. Btw, I also decided to use Keras Function API instead of Sequential API (still same network architecture) and it turned out to be slightly better. I run the model several times and the accuracy is averagely around 92\% to 95\%"
+\subsection{\large Transfer Learning with ResNet50}
+In the next progression, we decided to employ the transfer learning technique, using the ResNet50 model,
+which is pre-trained on the ImageNet dataset. Instead of training the entire neural network from scratch, 
+we leveraged the architecture of ResNet50 as a feature extractor by eliminating its output layer and freezing all other layers. 
+The classification head was built on top of the pre-trained model, which served as a convolutional base, followed by a Global Average Pooling layer to compress spatial dimensions. 
+The classifier was completed by a fully connected dense layer of 128 neurons with ReLU activation and an output layer with softmax activation, which was also accompanied by a dropout rate of 0.3 to prevent overfitting. \
 
+The model was trained over 20 epochs. This transition yielded a significant improvement in validation accuracy (89.20\% compared to 76.67\% in the first model) 
+while maintaining a reasonable training accuracy (92.56\%). Motivated by this encouragement, we tried to experiment with selective fine-tuning the model by unfreezing the last 30 layers of the ResNet50 pre-trained model, 
+allowing the weights of those layers to be adjusted during the backpropagation. With this technique, this model ended up with an accuracy of 97.53\%, 89.20\% and 79.19\% for the training, validation, and testing sets, respectively. At this stage, we also introduced new training practices such as learning rate management and early stopping, which shaped our training strategy for later experiments
 \section{\large Evaluation (1-2 pages)}
 In this project, three machine learning models—Convolutional Neural Networks (CNN), Support Vector Machines (SVM), and Random Forests (RF)—were trained and evaluated. In this section, the performance of these models are assessed using standard classification metrics, including accuracy, precision, recall, and F1 score. The dataset utilized for this evaluation consists of four classes: glioma, meningioma, pituitary tumor, and no tumor.
 
