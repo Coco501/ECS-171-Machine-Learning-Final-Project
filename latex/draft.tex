@@ -4,13 +4,13 @@
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
+\usepackage{booktabs}
 \usepackage{graphicx}
 \graphicspath{{images/}}
 \usepackage{textcomp}
 \usepackage{xcolor}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-% \setlength{\parindent}{1em}
 % \setlength{\parskip}{0.8em}
 \begin{document}
 
@@ -18,33 +18,6 @@
 \vspace{-0.6em}
 {\footnotesize Final Project for \textit{ECS 171 - Machine Learning} at UC Davis, with Professor Setareh Rafatirad}
 }
-
-% old author block
-% \author{
-% \IEEEauthorblockN{\large Joe Vogel}
-% \IEEEauthorblockA{\textit{UC Davis Computer Science} \\
-% jvogel@ucdavis.edu}
-
-% \and
-% \IEEEauthorblockN{\large Nam Nguyen}
-% \IEEEauthorblockA{\textit{UC Davis Computer Science} \\
-% ncnn@ucdavis.edu}
-
-% \and
-% \IEEEauthorblockN{\large Jonathan Mo}
-% \IEEEauthorblockA{\textit{UC Davis Computer Science} \\
-% jtnmo@ucdavis.edu}
-
-% \and
-% \IEEEauthorblockN{\large Aryan Karnwal}
-% \IEEEauthorblockA{\textit{UC Davis Computer Science} \\
-% akarnwal@ucdavis.edu}
-
-% \and
-% \IEEEauthorblockN{\large Richard Ho}
-% \IEEEauthorblockA{\textit{UC Davis Computer Science} \\
-% rdho@ucdavis.edu}
-% }
 
 \author{
 \centering
@@ -54,7 +27,7 @@
     Joe Vogel & Nam Nguyen & Jonathan Mo \\
     \textit{UC Davis Computer Science} & \textit{UC Davis Computer Science} & \textit{UC Davis Computer Science} \\
     jvogel@ucdavis.edu & ncnng@ucdavis.edu & jtnmo@ucdavis.edu \\
-    \vspace{0.6em}
+    \vspace{0.2em}
   \end{tabular}
   \vspace{-0.6em}
   \begin{tabular}{cc}
@@ -83,49 +56,51 @@ We hope this report serves not only as an informative summary of our findings, b
 
 \subsection{\large Motivation}
 
-As of 2025, there are more than 120 different kinds of brain tumors\textsuperscript{10}. Population statistics gathered by braintumor.org from 2015 through 2019 led researchers to estimate that in 2023, over 94,000 people would be diagnosed with a primary brain tumor\textsuperscript{9}, in America alone. 
+As of 2025, there are more than 120 different kinds of brain tumors\textsuperscript{1}. Population statistics gathered by braintumor.org from 2015 through 2019 led researchers to estimate that in 2023, over 94,000 people would be diagnosed with a primary brain tumor\textsuperscript{2}, in America alone. 
 
-Luckily, 72\% of primary brain tumors are benign. While not completely harmless, benign tumors are much less fatal than malignant (cancerous) tumors. However, that still leaves a concerning 28\% of tumors that are malignant. Of those 28\%, an estimated 65\% of cases are proven to be fatal. Among the malignant tumors, glioblastoma is the most common, with a survival rate of only 6.9\%. These numbers are tragic, and at the moment, the only way we know to reduce them is through early detection.
+Luckily, 72\% of primary brain tumors are benign. While not completely harmless, benign tumors are much less fatal than malignant (cancerous) tumors. However, that still leaves a concerning 28\% of tumors that are malignant. Of those 28\%, an estimated 65\% of cases are proven to be fatal. Among the malignant tumors, glioblastoma is the most common, with a survival rate of only 6.9\%. These numbers are tragic, and at the moment, the best way we know to reduce them is through early detection.
 
 Hundreds of thousands of MRI brain scans are performed every day. With the scans being so intricate, it can sometimes be hard for even a trained professional to determine whether or not a patient has a brain tumor, and even harder to tell which kind. 
 
-A tool that could detect and identify brain tumors within seconds, and with high accuracy, would not only save a lot of time and money, but lives. Like mentioned above, early detection is absolutely key to increasing survival rates. Getting more people in and out of MRI machines and having their scans be automatically processed and analyzed would save countless lives. Not to mention the impact it would have on developing nations who might not have as many specially trained doctors that can readily perform MRI analysis. Luckily in the real world, hospitals are already adopting and developing these ideas. 
+A tool that could detect and identify brain tumors within seconds, and with high accuracy, would not only save a lot of time and money, but lives. Like mentioned above, early detection is absolutely key to increasing survival rates. Getting more people in and out of MRI machines and having their scans be automatically processed and analyzed would save countless lives. Not to mention the impact such a tool would have on developing nations who might not have as many specially trained doctors that can readily perform MRI analysis. Luckily in the real world, hospitals are already adopting and developing these ideas. 
 
 \subsection{\large Approach}
-A classification machine learning model is a great approach to this problem. Using a convolutional neural network and an image dataset, we can train a model to accuractely classify brain tumors. With its complex neural structure, such a model can detect nuances and patterns in the scans that are otherwise hard to spot. This project used a dataset that focused on three brain tumor types: glioma, meningioma, pituitary. Along with the three tumor types, the model should also be able to classify scans as "no tumor". The aim for this model was to predict tumor classes with over 95\% accuracy.
+A classification machine learning model is a great approach to this problem. Using a convolutional neural network and an image dataset, we can train a model to accuractely classify brain tumors. With its complex structure, a CNN can detect nuances and patterns in the scans that are otherwise hard to spot. 
+
+This project focuses on three general brain tumor classes: glioma, meningioma, and pituitary. Each class contains many of the 120+ tumor types mentioned before. The model will also have a "no tumor" class. The aim for the model was to predict tumor classes with over 95\% accuracy.
 
 \section{\large Literature Review (Complete)}
 
-\subsection{\large Brain Tumor Classification in MRI Image Using Convolutional Neural Network$^{1}$}
+\subsection{\large Brain Tumor Classification in MRI Image Using Convolutional Neural Network\textsuperscript{3}}
 
 In this article from 2021, authors Khan et al. examine convolutional neural network models for brain tumor classification, reporting classification accuracies ranging from 80\% to 98\%. The authors highlight two primary challenges in training such models: (1) the scarcity of accurately labeled data, which increases training complexity and cost, and (2) inconsistency in image dimensions, given that CNNs require fixed-size input. Their dataset is partitioned into training, validation, and testing sets, serving model training, hyperparameter tuning, and final evaluation, respectively. Image pre-processing is performed using Canny Edge Detection, an open-source computer vision technique. To address the limited dataset size, the authors employ data augmentation methods such as flipping, rotation, and brightness adjustments to enhance variability. The model utilizes the ReLU activation function and stochastic gradient descent for optimization.
 
 Given our limited computational resources, we plan to utilize a pre-trained model. The eight-layer architecture discussed in the paper provides a useful baseline. The pre-processing techniques mentioned are also great starting points for us, and let us know what we should look out for. Furthermore, we intend to implement data augmentation techniques to improve generalization on our small dataset. The use of ReLU and stochastic gradient descent aligns well with our current understanding, and we aim to assess their impact on our model's performance.
 
-\subsection{\large A Deep CNN Based Multi-Class Classification of Alzheimer's Disease Using MRI$^{2}$}
+\subsection{\large A Deep CNN Based Multi-Class Classification of Alzheimer's Disease Using MRI\textsuperscript{4}}
 
 In this article, Farooq, Anwar, Awais, and Rehman demonstrate their implementation of a four-way Alzheimer's disease classifier. Considering their model also takes MRI imagery as input and has four class target labels, we can learn a lot from their experiments. The authors began their model development with data preprocessing and a technique known as skull stripping, which is the process of removing non-brain tissues like the skull or fat from MRI imagery. We could implement skull stripping in our model to improve the signal-to-noise ratio and reduce input complexity, which could help against overfitting. 
 
 Additionally, the article mentions the utilization of data augmentation to increase the data set; they simply flipped the images along the horizontal axis, which is valid due to the left and right symmetry of the brain. This method increased their dataset from 355 MRI volumes to 38024 images. We can implement the same method in our project because increasing the sample size can combat overfitting, making our model more accurate.
 
-\subsection{\large Brain Tumor Classification Using Convolutional Neural Networks$^{3}$}
+\subsection{\large Brain Tumor Classification Using Convolutional Neural Networks\textsuperscript{5}}
 
 In this publication, authors Seetha and Raja demonstrate the effectiveness of convolutional neural networks for brain tumor classification. Their proposed CNN-based classification approach achieves an impressive 97.5\% accuracy rate while maintaining low computational complexity compared to other methods. Seeing such a high accuracy be achieved is both inspiring and motivating for us. Considering their model also predicts four tumor types, their high accuracy rate sets a benchmark we should aspire to, and their focus on computational efficiency aligns with our resource constraints. 
 
 The authors implemented a deeper architecture design using small kernels, with neuron weights intentionally kept small to optimize performance. Their experimental results demonstrated that their CNN model outperformed other state-of-the-art methods in both accuracy and efficiency. Like our approach, they used a dataset containing various brain MRI scans and faced similar challenges with image preprocessing. Their optimization of kernel size and weight parameters offers valuable insights for our model development. Given that our initial prototype showed signs of overfitting (93\% training accuracy with 42\% testing accuracy), we should consider implementing some of the suggested architectural decisions regarding smaller kernels and weight optimizations, while continuing with our planned transfer learning approach to improve generalization.
 
+\section{\large Dataset Description (Complete)}
 
-\section{\large Dataset Description (1 page)}
-
-The dataset used for this project comes from a group of brilliant students at Savitribai Phule Pune University in India. It is an open source dataset that can be found for free on Kaggle\textsuperscript{4}. It is a well respected and reviewed dataset. The dataset consists of 3264 labeled MRI scan images. The images are divided into four categories. There are three different tumor types, and one set of “no tumor” scans. Because each image in our dataset is already classified, our model's training is considered supervised, as opposed to unsupervised, where each training image would not have an associated classification. An unsupervised model would require a much different approach, most likely using different algorithms.
+The dataset used for this project comes from a group of brilliant students at Savitribai Phule Pune University in India. It is an open source dataset that can be found for free on Kaggle\textsuperscript{6}. The dataset is reviewed and well respected. It consists of 3264 labeled MRI scan images. Like hinted at before, the images are divided into four categories: three different tumor types, and one set of “no tumor” scans. Because each image in our dataset is already labeled, our model's training is considered supervised, as opposed to unsupervised. An unsupervised model would require a much different approach, most likely using different algorithms.
 
 \subsection{\large Preprocessing}
 
-Due to the non-numerical nature of image datasets, our input features come in a different form than they normally would with a numerical dataset. Instead of having numerically represented features such as 'age', 'blood pressure', and so on, our dataset only has images. Technically, each image is a set of numbers (pixel intensities), but the idea remains. We don't really have a standard feature selection process, or get to choose which features to train our model on. Instead, things like image preprocessing and model hyperparameters are key to training an accurate model.
+Due to the non-numerical nature of image datasets, our input features come in a different form than they normally would with a numerical dataset. Instead of having numerically represented features such as 'age', 'blood pressure', and so on, our dataset only has images. Technically, each image is a set of numbers (pixel intensities), but the idea remains. There is no standard feature selection process, or process to choose which features to train the model on. Instead, things like image preprocessing and model hyperparameters are key to training an accurate model.
 
-Preprocessing steps might include things like image resizing, cropping, normalization, and data augmentation (rotating, flipping, zooming, etc.). We can even consider techniques like 'skull stripping', used to isolate only the brain, since we do not care about anything else in the scan.
+As explained under 'Literature Review', preprocessing steps might include techniques like image resizing, cropping, normalization, data augmentation (rotating, flipping, zooming), and more. Going even further, the 'skull stripping' technique mentioned by Farooq et al.\textsuperscript{4} can be used to isolate the brain tissue in an MRI scan. This is helpful for training a model, since we do not care about the skull or fat in the scans, it is considered noise. We do not want the model to train on those "features" of the image.
 
-\section{\large EDA (1 page)}
+\section{\large Exploratory Data Analysis (1 page)}
+% TODO: Complete but need to fix image placement so that EDA is on one consistent page
 
 % EXAMPLE image in a column
 % \begin{figure}[!ht]
@@ -165,13 +140,13 @@ Preprocessing steps might include things like image resizing, cropping, normaliz
     \includegraphics[width=0.49\textwidth]{ImagesPerClassTraining.png}
     \hfill
     \includegraphics[width=0.49\textwidth]{ImagesPerClassTesting.png}
-    \caption{\large The dataset has a consistent number of training images across classes, except for "no tumor". This should not be an issue because "no tumor" imagery has much less variance. For testing, the distribution of images is more varied, but this does not affect model performance, since the model is not trained on this data at all.}
+    \caption{\large The dataset has a consistent number of training images across classes, except for "no tumor". This should not be an issue because "no tumor" imagery has much less variance. For testing, the distribution of images is more varied, but this does not affect model performance, since the model is not trained on this data.}
     \label{fig:images-per-class}
 \end{figure*}
 
-As we can see in Figure 1 (left), there is an even distribution of images among each class (~825), except for the no tumor class (395). This is because the images without tumors have much less variance. We expect it to be much easier for the model to detect "no tumor", and we do not think the lower number of images in the "no tumor" class will have a negative effect on the model's ability to classify images as such. However, if we do see poor results in that classification specifically, we can try changing all classes to train on 395 images, to see if that helps with the class-specific overfitting. Additionally we could also focus our data augmentation on the "no tumor" class, bringing its number of images up to the others.
+As seen in the left histogram of \textit{Figure 1}, there is a relatively even distribution of data among each class in the training set, at around 825 images. However, the no tumor class has significantly less, with 395 images. We suspect this is because the scans without tumors have much less variance. And because of the reduced variance, it should be much easier for the model to detect "no tumor" scans. We did not think the lower number of images would have a negative effect on the model's ability to classify images as "no tumor", and we were right. However, if we did see poor results in that classification specifically, we could have tried training the model on 395 images for each class to see if that helped with the overfitting of the other classes. On the other hand, we could have performed data augmentation on the "no tumor" class, bringing its number of images up to the 825 range like the other classes. In hindsight, we did not have to apply either of these techniques.
 
-In our test dataset seen in Figure 1 (right), we have a much more uneven distribution among each class. This of course won't affect our model's ability, since it is not being trained on this data, but some results could be skewed considering the relatively low number of pituitary images. It could be useful to test against more pituitary imagery to ensure the model can handle all variations of scans. We could again perform data augmentation and create more pituitary data by rotating, zooming, and flipping our existing images. Testing against more data could give us more confidence in our model, if scores remain high.
+Shifting our focus toward the testing dataset, again looking at \textit{Figure 1}, but this time at the right histogram, we see that there is a much more uneven distribution among each class. This does not affect our model's performance, since it is not being trained on the testing data. However, we thought the results of the pituitary class could be skewed considering the relatively low number of pituitary, but it was also not a problem. If we had seen inconsitencies, it could have been useful to test against more pituitary imagery to ensure the model can handle all variations of scans. We could again have performed data augmentation to create more pituitary data. Testing against more data could give us more confidence in our model.
 
 \begin{figure*}[!ht]
     \centering
@@ -180,7 +155,7 @@ In our test dataset seen in Figure 1 (right), we have a much more uneven distrib
     \label{Dimensions of images in the dataset}
 \end{figure*}
 
-We can see in Figure 2 that our dataset is comprised of images of many varying sizes. There seems to be a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image pre-processing to convert all images into the same size so the model has consistent input. We will provide our CNN with the conventional 224x244 image dimensions.
+Taking a look at Figure 2, we can see that the dataset is comprised of images of many varying sizes. There is a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image pre-processing to convert all images into the same size so the model has consistent input. We will provide our CNN with the conventional 224x244 image dimensions.
 
 \section{\large Methodology (1-2 pages)}
 
@@ -205,60 +180,96 @@ Our first early prototype was a CNN model with 4 convolutional blocks, followed 
 To improve upon our first model, we applied k-fold cross validation and tuned hyperparameters such as dropout rate, number of layers/neurons, etc. We implemented grid search to tune our hyperparameters. We also planned to use transfer learning to reduce the number of learned parameters and implicitly filter irrelevant features, which can greatly reduce overfitting risks. Going forward, we'd use PyTorch, which gave us more flexibility in controlling forward pass, backpropagation, and optimization, allowing us to develop a better CNN model.
 
 \section{\large Experimental Results (2 pages)}
-Since deep learning is very efficient in detecting features from an image,
-and this characteristic is also beneficial to building other models using different base algorithms, 
-we have mainly focused on developing a Convolutional Neural Network (CNN) model with a high accuracy by iteratively refining both model architecture and training strategy. This section outlines the chronological development and iterative experimentation we have applied to finalize the set of models. 
-While the detailed performance of each model will be elaborated on in the following sections, this discussion emphasizes the architecture refinement, technical adjustments, and discoveries made during the project that improved the overall performance over time.
+
+Since deep learning is very efficient in detecting features from an image, and this characteristic is also beneficial to building other models using different base algorithms, we have mainly focused on developing a Convolutional Neural Network (CNN) model with a high accuracy by iteratively refining both model architecture and training strategy. This section outlines the chronological development and iterative experimentation we have applied to finalize the set of models. While the detailed performance of each model will be elaborated on in the following sections, this discussion emphasizes the architecture refinement, technical adjustments, and discoveries made during the project that improved the overall performance over time.
+
 \subsection{\large Baseline CNN Model}
-Our very first model was built from scratch using TensorFlow’s Sequential API. 
-The architecture consisted of 4 convolution blocks with subsequent increases in the number of filters (kernels), 
-each of which is followed by a max pooling layer helping reduce the spatial dimensions. 
-The last layers of the model are characterized by a dense layer of 128 neurons with ReLU activation and an output layer of 4 neurons with Softmax activation for multi-class classification, each of which is accompanied by a dropout layer to mitigate overfitting. \
+
+Our very first model was built from scratch using TensorFlow’s Sequential API. The architecture consisted of 4 convolution blocks with subsequent increases in the number of filters (kernels), 
+each of which is followed by a max pooling layer helping reduce the spatial dimensions. The last layers of the model are characterized by a dense layer of 128 neurons with ReLU activation and an output layer of 4 neurons with Softmax activation for multi-class classification, each of which is accompanied by a dropout layer to mitigate overfitting. 
 
 This model was trained over 20 epochs with categorical cross-entropy as the loss function and the Adam optimizer. 
-The model ended up with a training accuracy of 92.56\% and a validation accuracy of 76.67\%. 
-When tested on the testing set, the model only gave an accuracy of 42.13\%. The significant gap between training and testing performance implies signs of overfitting.
+The model ended up with a training accuracy of 92.56\% and a validation accuracy of 76.67\%. When tested on the testing set, the model only gave an accuracy of 42.13\%. The significant gap between training and testing performance implies signs of overfitting.
 
 \subsection{\large Transfer Learning with ResNet50}
-In the next progression, we decided to employ the transfer learning technique, using the ResNet50 model,
-which is pre-trained on the ImageNet dataset. Instead of training the entire neural network from scratch, 
-we leveraged the architecture of ResNet50 as a feature extractor by eliminating its output layer and freezing all other layers. 
-The classification head was built on top of the pre-trained model, which served as a convolutional base, followed by a Global Average Pooling layer to compress spatial dimensions. 
-The classifier was completed by a fully connected dense layer of 128 neurons with ReLU activation and an output layer with softmax activation, which was also accompanied by a dropout rate of 0.3 to prevent overfitting. \
 
-The model was trained over 20 epochs. This transition yielded a significant improvement in validation accuracy (89.20\% compared to 76.67\% in the first model) 
-while maintaining a reasonable training accuracy (92.56\%). Motivated by this encouragement, we tried to experiment with selective fine-tuning the model by unfreezing the last 30 layers of the ResNet50 pre-trained model, 
-allowing the weights of those layers to be adjusted during the backpropagation. With this technique, this model ended up with an accuracy of 97.53\%, 89.20\% and 79.19\% for the training, validation, and testing sets, respectively. At this stage, we also introduced new training practices such as learning rate management and early stopping, which shaped our training strategy for later experiments
+In the next progression, we decided to employ the transfer learning technique, using the ResNet50 model, which is pre-trained on the ImageNet dataset. Instead of training the entire neural network from scratch, we leveraged the architecture of ResNet50 as a feature extractor by eliminating its output layer and freezing all other layers. The classification head was built on top of the pre-trained model, which served as a convolutional base, followed by a Global Average Pooling layer to compress spatial dimensions. The classifier was completed by a fully connected dense layer of 128 neurons with ReLU activation and an output layer with softmax activation, which was also accompanied by a dropout rate of 0.3 to prevent overfitting. \
 
-\subsection{\large Dataset Reorganization and ResNet101 upgrade}
-Motivated by the significant improvement in the previous stage, we had defined that transfer learning would be one of the most critical techniques in developing our CNN model. We decided to try different pre-trained models, 
-from simpler models such as VGG16, VGG19 to more complicated ones in ResNet and EfficientNet families. 
-Even with either layer-wise fine-tuning or standard fine-tuning techniques applied to those models, 
-we had noticed the common trait, which is a persistent underperformance on the testing test (with an accuracy around 70.00\% to 80\%) 
-despite high accuracy in validation metrics (with an accuracy around 90\% to 93\%). This discrepancy prompted us to re-evaluate our dataset. 
-Initially, we had used the dataset split provided by Kaggle. We suspected that there might have been an imbalanced presentation across classes or feature distribution in the default split. 
-To resolve this issue, we decided to recombine the training and testing sets with shuffle, then split the entire dataset with a ratio consistent with that of the default split. \ 
+The model was trained over 20 epochs. This transition yielded a significant improvement in validation accuracy (89.20\% compared to 76.67\% in the first model) while maintaining a reasonable training accuracy (92.56\%). Motivated by this encouragement, we tried to experiment with selective fine-tuning the model by unfreezing the last 30 layers of the ResNet50 pre-trained model, allowing the weights of those layers to be adjusted during the backpropagation. With this technique, this model ended up with an accuracy of 97.53\%, 89.20\% and 79.19\% for the training, validation, and testing sets, respectively. At this stage, we also introduced new training practices such as learning rate management and early stopping, which shaped our training strategy for later experiments
 
-With available computational resources, we also upgraded to ResNet101, a larger architecture compared to ResNet50, 
-and transitioned to Keras Functional API to implement our model’s architecture for better flexibility and reusability. 
-We employed the same structure as in the ResNet50 setup. The model was initially trained over 20 epochs with all ResNet101 layers frozen, yielding a training accuracy of 91.72\% and validation accuracy of 85.07\%. 
-When the fine-tuning technique was applied (with the last 40 layers unfrozen), the model reached 99.67\% training accuracy and 95.83\% validation accuracy after being trained over 4 additional epochs. 
-The model also performed much better on the testing data, yielding 96.94\% accuracy with reasonably high f1-scores for each class label. \
+\subsection{\large Dataset Reorganization and ResNet101 Upgrade}
 
-By employing ResNet101 with layer-wise fine-tuning and a better dataset split, 
-we ended up with a highly robust CNN model with consistent performance across training, validation, and testing data.
+Motivated by the significant improvement in the previous stage, we had defined that transfer learning would be one of the most critical techniques in developing our CNN model. We decided to try different pre-trained models, from simpler models such as VGG16, VGG19 to more complicated ones in ResNet and EfficientNet families. Even with either layer-wise fine-tuning or standard fine-tuning techniques applied to those models, we had noticed the common trait, which is a persistent underperformance on the testing test (with an accuracy around 70.00\% to 80\%) despite high accuracy in validation metrics (with an accuracy around 90\% to 93\%). This discrepancy prompted us to re-evaluate our dataset. Initially, we had used the dataset split provided by Kaggle. We suspected that there might have been an imbalanced presentation across classes or feature distribution in the default split. To resolve this issue, we decided to recombine the training and testing sets with shuffle, then split the entire dataset with a ratio consistent with that of the default split. \ 
+
+With available computational resources, we also upgraded to ResNet101, a larger architecture compared to ResNet50, and transitioned to Keras Functional API to implement our model's architecture for better flexibility and reusability. We employed the same structure as in the ResNet50 setup. The model was initially trained over 20 epochs with all ResNet101 layers frozen, yielding a training accuracy of 91.72\% and validation accuracy of 85.07\%. When the fine-tuning technique was applied (with the last 40 layers unfrozen), the model reached 99.67\% training accuracy and 95.83\% validation accuracy after being trained over 4 additional epochs. The model also performed much better on the testing data, yielding 96.94\% accuracy with reasonably high f1-scores for each class label.
+
+By employing ResNet101 with layer-wise fine-tuning and a better dataset split, we ended up with a highly robust CNN model with consistent performance across training, validation, and testing data.
 
 \subsection{\large Non-deep Learning Models with feature extraction}
-To develop other classifiers that incorporate algorithms rather than deep learning, we decided to employ Support Vector Machine (SVM) and Random Forest Classifier (RF) models. 
-We leveraged the fine-tuned CNN model as the feature extraction for our selected dataset in order to obtain high accuracy while keeping the training process relatively simple. 
-More specifically, we extracted the output of the GlobalAveragePooling2D layer of the fine-tuned CNN model, which includes 2048-dimensional feature vectors, and that result would serve as the input for each non-deep learning model. 
-In other words, our SVM and RF models were trained on a more semantically meaningful input space compared to raw pixels. \
 
-After conducting hyperparameter tuning, we obtained an overall accuracy of 95.66\% and 94.90\% for SVM and RF classifiers, respectively. 
-Although these two models were less efficient in distinguishing between glioma and meningioma compared to the CNN model, 
-other performance metrics were relatively high. In general, these results demonstrate that classical classifiers, when paired with feature extractors, can deliver highly competitive performance with significantly reduced training complexity
+To develop other classifiers that incorporate algorithms rather than deep learning, we decided to employ Support Vector Machine (SVM) and Random Forest Classifier (RF) models. We leveraged the fine-tuned CNN model as the feature extraction for our selected dataset in order to obtain high accuracy while keeping the training process relatively simple. More specifically, we extracted the output of the GlobalAveragePooling2D layer of the fine-tuned CNN model, which includes 2048-dimensional feature vectors, and that result would serve as the input for each non-deep learning model. In other words, our SVM and RF models were trained on a more semantically meaningful input space compared to raw pixels. 
+
+After conducting hyperparameter tuning, we obtained an overall accuracy of 95.66\% and 94.90\% for SVM and RF classifiers, respectively. Although these two models were less efficient in distinguishing between glioma and meningioma compared to the CNN model, other performance metrics were relatively high. In general, these results demonstrate that classical classifiers, when paired with feature extractors, can deliver highly competitive performance with significantly reduced training complexity
 
 \section{\large Evaluation (1-2 pages)}
+
+\begin{table}[h!]
+\centering
+\caption{CNN Metrics}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} & \textbf{Support} \\
+\midrule
+glioma     & 0.98 & 0.93 & 0.95 & 109 \\
+meningioma & 0.93 & 0.97 & 0.95 & 105 \\
+no tumor   & 0.97 & 0.98 & 0.98 & 60  \\
+pituitary  & 0.99 & 0.99 & 0.99 & 118 \\
+\midrule
+\textbf{Accuracy}    &      &      & 0.97 & 392 \\
+\textbf{Macro avg}   & 0.97 & 0.97 & 0.97 & 392 \\
+\textbf{Weighted avg}& 0.97 & 0.97 & 0.97 & 392 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{SVM Metrics}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} & \textbf{Support} \\
+\midrule
+glioma     & 0.98 & 0.91 & 0.94 & 109 \\
+meningioma & 0.89 & 0.97 & 0.93 & 105 \\
+no tumor   & 0.98 & 0.97 & 0.97 & 60  \\
+pituitary  & 0.98 & 0.98 & 0.98 & 118 \\
+\midrule
+\textbf{Accuracy}    &      &      & 0.96 & 392 \\
+\textbf{Macro avg}   & 0.96 & 0.96 & 0.96 & 392 \\
+\textbf{Weighted avg}& 0.96 & 0.96 & 0.96 & 392 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{RF Metrics}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} & \textbf{Support} \\
+\midrule
+glioma     & 0.98 & 0.89 & 0.93 & 109 \\
+meningioma & 0.87 & 0.98 & 0.92 & 105 \\
+no tumor   & 1.00 & 0.93 & 0.97 & 60  \\
+pituitary  & 0.97 & 0.98 & 0.98 & 118 \\
+\midrule
+\textbf{Accuracy}    &      &      & 0.95 & 392 \\
+\textbf{Macro avg}   & 0.96 & 0.95 & 0.95 & 392 \\
+\textbf{Weighted avg}& 0.95 & 0.95 & 0.95 & 392 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 In this project, three machine learning models—Convolutional Neural Networks (CNN), Support Vector Machines (SVM), and Random Forests (RF)—were trained and evaluated. In this section, the performance of these models are assessed using standard classification metrics, including accuracy, precision, recall, and F1 score. The dataset utilized for this evaluation consists of four classes: glioma, meningioma, pituitary tumor, and no tumor.
 
 The CNN model demonstrated the highest overall accuracy at 96.68\%, followed closely by SVM at 95.66\%, and RF at 94.90\%. Macro and weighted F1-scores mirrored this trend, with CNN achieving 0.97, SVM 0.96, and RF 0.95 in both averages. These scores indicate that CNN not only achieves better overall classification performance but also maintains consistency across classes in terms of precision and recall.
@@ -282,6 +293,7 @@ The F1 score of 0.97 for the no tumor class highlights the model’s strong perf
 With the highest F1 score of 0.98, the model shows excellent performance in detecting pituitary tumors. This suggests that the pituitary tumor class is the most distinct or consistently represented in the dataset, allowing the model to make confident predictions. High F1 scores for both precision and recall indicate that pituitary tumors are both correctly identified and rarely confused with other classes. This robustness may stem from more uniform imaging patterns or stronger contrast features in this tumor type.
 
 \section{\large Conclusion (1/2 page)}
+
 The above evaluation highlights CNN's strength in handling complex, high-dimensional image data, likely due to its hierarchical feature extraction capability. Its superior balance in both precision and recall in all tumor types supports its suitability for real-world clinical deployment, where false positives and false negatives carry significant risk.
 
 SVM performed comparably well, especially in the detection of meningioma and pituitary tumors, and may offer a lighter alternative in environments with limited computational resources. However, it showed reduced precision in some classes, which made it slightly less robust overall.
@@ -289,16 +301,19 @@ SVM performed comparably well, especially in the detection of meningioma and pit
 RF, while achieving remarkable precision, particularly for the "no tumor" class, exhibited reduced recall across multiple classes. This suggests a tendency to make fewer false positives, at the expense of missing actual tumor cases, which is a very serious and life-threatening issue in medical diagnostics.
 
 \section{\large Our Team (1 page)}
-The link to our GitHub\textsuperscript{8} repository for this project can be found in the references of this report.
 
-project roadmap? Reference the first one pager outline assignment we did on google doc
+The link to this project's GitHub\textsuperscript{10} repository can be found in the references of this report. The repository holds our source code, the dataset, this report, and some more supplementary files. Please feel free to fork the repository and mess around with it as you wish.
+
+Project roadmap? Reference the first one pager outline assignment we did on google doc
 %TODO --- roadmap?
+
 \subsection{\large Demonstration}
-include youtube video of our demo
+
+For those interested in seeing the model in action, a short five minute demonstration of our model can be found on YouTube\textsuperscript{11}. The demo briefly walks through how to use the model, how the frontend was developed, and how the model is invoked.
 
 \subsection{\large Roles and Contributions}
 
-Joe: As the team leader, Joe has taken charge of organizing meetings, assigning tasks, and the general oversight over the project. In the coming weeks, Joe will be focusing on Exploratory Data Analysis, Literature Review, and Model Optimization. 
+Joe: As the team leader, Joe took charge of logistics. He organized meetings, defined the roadmap for the project, and kept the team on track. He also lead the exploratory data anaylsis subproject, and was crucial to the creation of the final report. 
 
 Nam: Nam took charge of making the first prototype of our model. Having this model as a starting and reference point is absolutely crucial in the development of subsequent models. In the next few weeks, Nam will be researching different frameworks and libraries to develop other CNN models to see which best fit our dataset.
 
@@ -309,6 +324,12 @@ Richard: Richard contributed to the project by evaluating the performance of the
 Aryan: Aryan completed a literature review and analyzed research papers to identify techniques we can use to address the models overfitting. In the next few weeks Aryan will continue working to improve the models accuracy while also working on documentation and reports. 
 
 \begin{thebibliography}{00}
+
+\bibitem{Hopkins2025}
+Brain tumor types. Johns Hopkins Medicine. (2021, November 8). https://www.hopkinsmedicine.org/health/conditions-and-diseases/brain-tumor/brain-tumor-types 
+
+\bibitem{NBTS2022}
+Brain tumor facts. National Brain Tumor Society. (2024, February 20). https://braintumor.org/brain-tumors/about-brain-tumors/brain-tumor-facts/ 
 
 \bibitem{Khan2021}
 H. A. Khan, W. Jue, M. Mushtaq, and M. U. Mushtaq, “Brain tumor classification in MRI image using convolutional neural network,” *Math. Biosci. Eng.*, 2021. 
@@ -335,11 +356,8 @@ R. Meier, A. P. de Mortanges, R. Wiest, and U. Knecht, “Exploratory analysis o
 J. Vogel, N. Nguyen, J. Mo, A. Karnwal, R. Ho, "Neural Networks for Neural Tumors". GitHub. https://github.com/Coco501/Neural-Networks-
 for-Neural-Tumors
 
-\bibitem{NBTS2022}
-Brain tumor facts. National Brain Tumor Society. (2024, February 20). https://braintumor.org/brain-tumors/about-brain-tumors/brain-tumor-facts/ 
-
-\bibitem{Hopkins2025}
-Brain tumor types. Johns Hopkins Medicine. (2021, November 8). https://www.hopkinsmedicine.org/health/conditions-and-diseases/brain-tumor/brain-tumor-types 
+\bibitem{Karnwal2025}
+A. Karnwal, "Brain Tumor Classification Application Demo". (2025), YouTube. https://www.youtube.com/watch?v=ECMGXgMrji0
 
 \end{thebibliography}
 
