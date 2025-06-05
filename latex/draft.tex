@@ -214,14 +214,14 @@ After conducting hyperparameter tuning, we obtained an overall accuracy of 96\% 
 \begin{table}[h!]
 \centering
 \caption{CNN Metrics}
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
+\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} & \textbf{Support} \\
 \midrule
-glioma     & 0.98 & 0.93 & 0.95 \\
-meningioma & 0.93 & 0.97 & 0.95 \\
-no tumor   & 0.97 & 0.98 & 0.98 \\
-pituitary  & 0.99 & 0.99 & 0.99 \\
+glioma     & 0.98 & 0.93 & 0.95 & 109 \\
+meningioma & 0.93 & 0.97 & 0.95 & 105 \\
+no tumor   & 0.97 & 0.98 & 0.98 & 60 \\
+pituitary  & 0.99 & 0.99 & 0.99 & 118 \\
 \midrule
 \textbf{Accuracy} \textbf{0.97} \\
 \bottomrule
@@ -231,14 +231,14 @@ pituitary  & 0.99 & 0.99 & 0.99 \\
 \begin{table}[h!]
 \centering
 \caption{SVM Metrics}
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
+\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} & \textbf{Support} \\
 \midrule
-glioma     & 0.98 & 0.91 & 0.94 \\
-meningioma & 0.89 & 0.97 & 0.93 \\
-no tumor   & 0.98 & 0.97 & 0.97 \\
-pituitary  & 0.98 & 0.98 & 0.98 \\
+glioma     & 0.98 & 0.91 & 0.94 & 109 \\
+meningioma & 0.89 & 0.97 & 0.93 & 105 \\
+no tumor   & 0.98 & 0.97 & 0.97 & 60 \\
+pituitary  & 0.98 & 0.98 & 0.98 & 118 \\
 \midrule
 \textbf{Accuracy} \textbf{0.96} \\
 \bottomrule
@@ -248,14 +248,14 @@ pituitary  & 0.98 & 0.98 & 0.98 \\
 \begin{table}
 \centering
 \caption{RF Metrics}
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
+\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} & \textbf{Support} \\
 \midrule
-glioma     & 0.98 & 0.89 & 0.93 \\
-meningioma & 0.87 & 0.98 & 0.92 \\
-no tumor   & 1.00 & 0.93 & 0.97 \\
-pituitary  & 0.97 & 0.98 & 0.98 \\
+glioma     & 0.98 & 0.89 & 0.93 & 109 \\
+meningioma & 0.87 & 0.98 & 0.92 & 105 \\
+no tumor   & 1.00 & 0.93 & 0.97 & 60 \\
+pituitary  & 0.97 & 0.98 & 0.98 & 118 \\
 \midrule
 \textbf{Accuracy} \textbf{0.95} \\
 \bottomrule
