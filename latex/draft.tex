@@ -58,7 +58,7 @@ We hope this report serves not only as an informative summary of our findings, b
 
 \subsection{\large Motivation}
 
-As of 2025, there are more than 120 different kinds of brain tumors\textsuperscript{1}. Population statistics gathered by braintumor.org from 2015 through 2019 led researchers to estimate that in 2023, over 94,000 people would be diagnosed with a primary brain tumor\textsuperscript{2}, in America alone. 
+As of 2025, there are more than 120 different kinds of brain tumors\textsuperscript{1}. Population statistics gathered by braintumor.org from 2015 through 2019 led researchers to estimate that in 2023, over 94,000 people would be diagnosed with a primary brain tumor, in America alone\textsuperscript{2}. 
 
 Luckily, 72\% of primary brain tumors are benign. While not completely harmless, benign tumors are much less fatal than malignant (cancerous) tumors. However, that still leaves a concerning 28\% of tumors that are malignant. Of those 28\%, an estimated 65\% of cases are proven to be fatal. Among the malignant tumors, glioblastoma is the most common, with a survival rate of only 6.9\%. These numbers are tragic, and at the moment, the best way we know to reduce them is through early detection.
 
@@ -70,7 +70,7 @@ A tool that could detect and identify brain tumors within seconds, and with high
 
 A classification machine learning model is a great approach to this problem. Using a convolutional neural network and an image dataset, we can train a model to accurately classify brain tumors. With its complex structure, a CNN can detect nuances and patterns in the scans that are otherwise hard to spot. 
 
-This project focuses on three general brain tumor classes: glioma, meningioma, and pituitary. Each class contains many of the 120+ tumor types mentioned before. The model will also have a ``no tumor" class. The aim for the model was to predict tumor classes with over 95\% accuracy.
+This project focuses on three general brain tumor classes: glioma, meningioma, and pituitary. Each class contains many of the 120+ tumor types mentioned before. The model will also have a ``no tumor" class. The aim for the model was to make predictions with over 95\% accuracy.
 
 \section{\large Literature Review}
 
@@ -84,7 +84,7 @@ Given our limited computational resources, we plan to utilize a pre-trained mode
 
 In this article, Farooq, Anwar, Awais, and Rehman demonstrate their implementation of a four-way Alzheimer's disease classifier. Considering their model also takes MRI imagery as input and has four class target labels, their methodology provides valuable insights. The authors began their model development with data preprocessing and a technique known as skull stripping, which is the process of removing non-brain tissues like the skull or fat from MRI imagery. We could implement skull stripping in our model to improve the signal-to-noise ratio and reduce input complexity, which could help against overfitting. 
 
-Additionally, the article mentions the utilization of data augmentation to increase the size of the dataset: they simply flipped the images along the horizontal axis, which is valid due to the left and right symmetry of the brain. This method grew their dataset from 355 MRI scans to 38,024. We can implement the same method in our project to increase the sample size, and combat overfitting, making our model more accurate.
+Additionally, this article also mentions the utilization of data augmentation to increase the size of the dataset: they simply flipped the images along the horizontal axis, which is valid due to the left and right symmetry of the brain. This method grew their dataset from 355 MRI scans to 38,024. We can implement the same method in our project to increase the sample size, and combat overfitting, making our model more accurate.
 
 \subsection{\large Brain Tumor Classification Using Convolutional Neural Networks\textsuperscript{5}}
 
@@ -98,9 +98,9 @@ The dataset used for this project comes from a group of brilliant students at Sa
 
 \subsection{\large Preprocessing}
 
-Due to the non-numerical nature of image datasets, our input features come in a different form than they normally would with a numerical dataset. Instead of having numerically represented features such as `age', `blood pressure', and so on, our dataset only has images. Technically, each image is a set of numbers (pixel intensities), but the idea remains. There is no standard feature selection process, or process to choose which features to train the model on. Instead, things like image preprocessing and model hyperparameters are key to training an accurate model.
+Due to the non-numerical nature of image datasets, our input features come in a different form than they normally would with a numerical dataset. Instead of having numerically represented features such as `age', `blood pressure', and so on, our dataset only has images. Technically, each image is a set of numbers (pixel intensities), but the idea remains the same. There is no standard feature selection process, or process to choose which features to train the model on. Instead, things like image preprocessing and model hyperparameters are key to training an accurate model.
 
-As explained under `Literature Review', preprocessing steps might include techniques like image resizing, cropping, normalization, data augmentation (rotating, flipping, zooming), and more. Going even further, the `skull stripping' technique mentioned by Farooq et al.\textsuperscript{4} can be used to isolate the brain tissue in an MRI scan. This is helpful for training a model, since we do not care about the skull or fat in the scans, it is considered noise. We do not want the model to train on those features of the image.
+As explained under the \textit{Literature Review} section, preprocessing steps might include techniques like image resizing, cropping, normalization, data augmentation (rotating, flipping, zooming), and more. Going even further, the `skull stripping' technique mentioned by Farooq et al.\textsuperscript{4} can be used to isolate the brain tissue in an MRI scan. This is helpful for training a model, since we do not care about the skull or fat in the scans, it is considered noise. We do not want the model to train on those features of the image.
 
 \section{\large Exploratory Data Analysis}
 \begin{figure*}[!ht]
@@ -114,7 +114,7 @@ As explained under `Literature Review', preprocessing steps might include techni
 
 As seen in the left histogram of \textit{Figure 1} on the next page, there is a relatively even distribution of data among each class in the training set, at around 825 images. However, the no tumor class has significantly less, with 395 images. We suspect this is because the scans without tumors have much less variance. And because of the reduced variance, it should be much easier for the model to detect ``no tumor" scans. We did not think the lower number of images would have a negative effect on the model's ability to classify images as ``no tumor", and we were right. However, if we did see poor results in that classification specifically, we could have tried training the model on 395 images for each class to see if that helped with the overfitting of the other classes. On the other hand, we could have performed data augmentation on the ``no tumor" class, bringing its number of images up to the 825 range like the other classes. In hindsight, we did not have to apply either of these techniques.
 
-Shifting our focus toward the testing dataset, again looking at \textit{Figure 1}, but this time at the right histogram, we see that there is a much more uneven distribution among each class. This does not affect our model's performance, since it is not being trained on the testing data. However, we thought the results of the pituitary class could be skewed considering the relatively low number of pituitary, but it was also not a problem. If we had seen inconsitencies, it could have been useful to test against more pituitary imagery to ensure the model can handle all variations of scans. We could again have performed data augmentation to create more pituitary data. Testing against more data could give us more confidence in our model.
+Shifting our focus toward the testing dataset, again looking at \textit{Figure 1}, but this time at the right histogram, we see that there is a much more uneven distribution among each class. This does not affect our model's performance, since it is not being trained on the testing data. However, we thought the results of the pituitary class could be skewed considering the relatively low number of scans, but it was also not a problem. If we had seen inconsitencies, it could have been useful to test against more pituitary imagery to ensure the model can handle more variations of scans. We could again have performed data augmentation to create more pituitary data. Testing against more data could give us more confidence in our model.
 
 \begin{figure*}[!ht]
     \centering
@@ -123,17 +123,17 @@ Shifting our focus toward the testing dataset, again looking at \textit{Figure 1
     \label{Dimensions of images in the dataset}
 \end{figure*}
 
-Taking a look at Figure 2, again on the next page, we can see that the dataset is comprised of images of many varying sizes. There is a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image preprocessing to convert all images into the same size so the model has consistent input. 
+Taking a look at \textit{Figure 2}, again on the next page, we can see that the dataset is comprised of images of many varying sizes. There is a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image preprocessing to convert all images into the same size so the model has consistent input. 
 
 \section{\large Methodology}
 
 \subsection{\large Feature Selection}
 
-As mentioned in the dataset description, we don't have labels for our input features like a numerical dataset would have. We only have our images, which are technically each a set of pixel intensity values, but it means we can't select certain features to train our model on. Instead, we can perform some image preprocessing and hyperparameter tuning to increase our model's accuracy.
+As mentioned in the dataset description, we don't have labels for our input features like a numerical dataset would have. We only have our images, which are technically each a set of pixel intensity values, but it means we can't select certain features to train our model on. However, we can still perform image preprocessing and hyperparameter tuning to increase our model's accuracy.
 
-Looking at Figure 2 again, we see all of our images have different dimensions. As a preprocessing step, we will resize all images to be 224x224 pixels, the conventional CNN input size. The resizing step is not as simple as it sounds though, we must be careful not to create unwanted noise in our data. After imagine resizing, we then normalize each pixel's value from its 3-channel RGB form.
+Looking at \textit{Figure 2} again, we see all of our images have different dimensions. As a preprocessing step, we will resize all images to be 224x224 pixels, the conventional CNN input size. The resizing step is not as simple as it sounds though, we must be careful not to create unwanted noise in our data. After imagine resizing, we then normalize each pixel's value from its 3-channel RGB form.
 
-The training dataset consists of 2870 MRI scans. To increase the size of the training dataset, we can perform data augmentation as mentioned previously. We can rotate, flip, and zoom the images to create `artificial' data that would hopefully reduce any overfitting and allow for the model to better capture underlying patterns. We also would expect this technique to allow for the model to predict against a larger variety of testing data (i.e. rotated images). 
+The training dataset consists of 2870 MRI scans. If needed, we can perform data augmentation as mentioned previously. We can rotate, flip, and zoom the images to create `artificial' data that would hopefully reduce any overfitting and allow for the model to better capture underlying patterns. We also would expect this technique to allow for the model to predict against a larger variety of testing data (i.e. rotated images). 
 
 Along with input features, the hyperparameters of a model are crucial to achieving a good fit. The key hyperparameters for the CNN model were: batch size for gradient descent, training epochs, loss function, dropout rate, and a few others. Techniques like grid search can be used for hyperparameter tuning, more on that later.
 
