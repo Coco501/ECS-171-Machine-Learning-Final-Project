@@ -1,7 +1,9 @@
 \documentclass[conference]{IEEEtran}
 %Template version as of 6/27/2024
 
+\usepackage{balance}
 \usepackage{cite}
+\usepackage{tabularx}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{booktabs}
@@ -51,7 +53,7 @@ Brain tumor classification, Convolutional Neural Network (CNN), MRI brain imager
 \large 
 \section{\large Introduction (Complete)}
 
-As a team of five young computer science students with no prior machine learning experience, we ambitously decided to tackle the real world challenge of brain tumor classification. Through hours and hours of research and trial and error, we learned a lot, and we have a lot to share. 
+As a team of five young computer science students with no prior machine learning experience, we ambitously decided to tackle the real-world challenge of brain tumor classification. Through hours and hours of research and trial and error, we learned a lot, and we have a lot to share. 
 
 We hope this report serves not only as an informative summary of our findings, but also as motivation for your own projects. We faced many challenges during this project, but in the end created something we are all very proud of, despite our lack of experience.
 
@@ -63,13 +65,13 @@ Luckily, 72\% of primary brain tumors are benign. While not completely harmless,
 
 Hundreds of thousands of MRI brain scans are performed every day. With the scans being so intricate, it can sometimes be hard for even a trained professional to determine whether or not a patient has a brain tumor, and even harder to tell which kind. 
 
-A tool that could detect and identify brain tumors within seconds, and with high accuracy, would not only save a lot of time and money, but lives. Like mentioned above, early detection is absolutely key to increasing survival rates. Getting more people in and out of MRI machines and having their scans be automatically processed and analyzed would save countless lives. Not to mention the impact such a tool would have on developing nations who might not have as many specially trained doctors that can readily perform MRI analysis. Luckily in the real world, hospitals are already adopting and developing these ideas. 
+A tool that could detect and identify brain tumors within seconds, and with high accuracy, would not only save a lot of time and money, but lives. Like mentioned above, early detection is absolutely key to increasing survival rates. Getting more people in and out of MRI machines and having their scans be automatically processed and analyzed would save countless lives. Not to mention the impact such a tool would have on developing nations who might not have as many specially trained doctors that can readily perform MRI analysis. Luckily in the real-world, hospitals are already adopting and developing these ideas. 
 
 \subsection{\large Approach}
 
 A classification machine learning model is a great approach to this problem. Using a convolutional neural network and an image dataset, we can train a model to accuractely classify brain tumors. With its complex structure, a CNN can detect nuances and patterns in the scans that are otherwise hard to spot. 
 
-This project focuses on three general brain tumor classes: glioma, meningioma, and pituitary. Each class contains many of the 120+ tumor types mentioned before. The model will also have a "no tumor" class. The aim for the model was to predict tumor classes with over 95\% accuracy.
+This project focuses on three general brain tumor classes: glioma, meningioma, and pituitary. Each class contains many of the 120+ tumor types mentioned before. The model will also have a ``no tumor" class. The aim for the model was to predict tumor classes with over 95\% accuracy.
 
 \section{\large Literature Review (Complete)}
 
@@ -97,9 +99,9 @@ The dataset used for this project comes from a group of brilliant students at Sa
 
 \subsection{\large Preprocessing}
 
-Due to the non-numerical nature of image datasets, our input features come in a different form than they normally would with a numerical dataset. Instead of having numerically represented features such as 'age', 'blood pressure', and so on, our dataset only has images. Technically, each image is a set of numbers (pixel intensities), but the idea remains. There is no standard feature selection process, or process to choose which features to train the model on. Instead, things like image preprocessing and model hyperparameters are key to training an accurate model.
+Due to the non-numerical nature of image datasets, our input features come in a different form than they normally would with a numerical dataset. Instead of having numerically represented features such as `age', `blood pressure', and so on, our dataset only has images. Technically, each image is a set of numbers (pixel intensities), but the idea remains. There is no standard feature selection process, or process to choose which features to train the model on. Instead, things like image preprocessing and model hyperparameters are key to training an accurate model.
 
-As explained under 'Literature Review', preprocessing steps might include techniques like image resizing, cropping, normalization, data augmentation (rotating, flipping, zooming), and more. Going even further, the 'skull stripping' technique mentioned by Farooq et al.\textsuperscript{4} can be used to isolate the brain tissue in an MRI scan. This is helpful for training a model, since we do not care about the skull or fat in the scans, it is considered noise. We do not want the model to train on those "features" of the image.
+As explained under `Literature Review', preprocessing steps might include techniques like image resizing, cropping, normalization, data augmentation (rotating, flipping, zooming), and more. Going even further, the `skull stripping' technique mentioned by Farooq et al.\textsuperscript{4} can be used to isolate the brain tissue in an MRI scan. This is helpful for training a model, since we do not care about the skull or fat in the scans, it is considered noise. We do not want the model to train on those ``features" of the image.
 
 \section{\large Exploratory Data Analysis (1 page)}
 % TODO: Complete but need to fix image placement so that EDA is on one consistent page
@@ -142,11 +144,11 @@ As explained under 'Literature Review', preprocessing steps might include techni
     \includegraphics[width=0.49\textwidth]{ImagesPerClassTraining.png}
     \hfill
     \includegraphics[width=0.49\textwidth]{ImagesPerClassTesting.png}
-    \caption{\large The dataset has a consistent number of training images across classes, except for "no tumor". This should not be an issue because "no tumor" imagery has much less variance. For testing, the distribution of images is more varied, but this does not affect model performance, since the model is not trained on this data.}
+    \caption{\large The dataset has a consistent number of training images across classes, except for ``no tumor". This should not be an issue because ``no tumor" imagery has much less variance. For testing, the distribution of images is more varied, but this does not affect model performance, since the model is not trained on this data.}
     \label{images-per-class}
 \end{figure*}
 
-As seen in the left histogram of \textit{Figure 1}, there is a relatively even distribution of data among each class in the training set, at around 825 images. However, the no tumor class has significantly less, with 395 images. We suspect this is because the scans without tumors have much less variance. And because of the reduced variance, it should be much easier for the model to detect "no tumor" scans. We did not think the lower number of images would have a negative effect on the model's ability to classify images as "no tumor", and we were right. However, if we did see poor results in that classification specifically, we could have tried training the model on 395 images for each class to see if that helped with the overfitting of the other classes. On the other hand, we could have performed data augmentation on the "no tumor" class, bringing its number of images up to the 825 range like the other classes. In hindsight, we did not have to apply either of these techniques.
+As seen in the left histogram of \textit{Figure 1} on the next page, there is a relatively even distribution of data among each class in the training set, at around 825 images. However, the no tumor class has significantly less, with 395 images. We suspect this is because the scans without tumors have much less variance. And because of the reduced variance, it should be much easier for the model to detect ``no tumor" scans. We did not think the lower number of images would have a negative effect on the model's ability to classify images as ``no tumor", and we were right. However, if we did see poor results in that classification specifically, we could have tried training the model on 395 images for each class to see if that helped with the overfitting of the other classes. On the other hand, we could have performed data augmentation on the ``no tumor" class, bringing its number of images up to the 825 range like the other classes. In hindsight, we did not have to apply either of these techniques.
 
 Shifting our focus toward the testing dataset, again looking at \textit{Figure 1}, but this time at the right histogram, we see that there is a much more uneven distribution among each class. This does not affect our model's performance, since it is not being trained on the testing data. However, we thought the results of the pituitary class could be skewed considering the relatively low number of pituitary, but it was also not a problem. If we had seen inconsitencies, it could have been useful to test against more pituitary imagery to ensure the model can handle all variations of scans. We could again have performed data augmentation to create more pituitary data. Testing against more data could give us more confidence in our model.
 
@@ -157,7 +159,7 @@ Shifting our focus toward the testing dataset, again looking at \textit{Figure 1
     \label{Dimensions of images in the dataset}
 \end{figure*}
 
-Taking a look at Figure 2, we can see that the dataset is comprised of images of many varying sizes. There is a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image pre-processing to convert all images into the same size so the model has consistent input. 
+Taking a look at Figure 2, again on the next page, we can see that the dataset is comprised of images of many varying sizes. There is a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image pre-processing to convert all images into the same size so the model has consistent input. 
 
 \section{\large Methodology (Complete)}
 
@@ -199,7 +201,7 @@ The model was trained over 20 epochs. The transition to transfer learning yielde
 
 Motivated by the significant improvement in the previous stage, we had defined that transfer learning would be one of the most critical techniques in developing our CNN model. We decided to try different pre-trained models, from simpler models such as VGG16 and VGG19, to more complex ones in the ResNet and EfficientNet families. Even with either layer-wise fine-tuning or standard fine-tuning techniques applied to those models, we had noticed a common trait, persistent underperformance on the testing test (with an accuracy around 70\% to 80\%). This discrepancy prompted us to re-evaluate our dataset. Initially, we had used the dataset split provided by Kaggle. We suspected that there might have been an imbalanced presentation across classes or feature distribution in the default split. To resolve this issue, we decided to recombine the training and testing sets with shuffle, then split the entire dataset with a ratio consistent with that of the default split.  
 
-With limited available computational resources, we also upgraded our pre-trained model to ResNet101, a more complex model compared to ResNet50. We employed the same structure as in the ResNet50 setup. The model was initially trained over 20 epochs with all ResNet101 layers frozen, yielding a training accuracy of 92\% and validation accuracy of 85\%. When the fine-tuning technique was applied (with the last 40 layers unfrozen), the model reached 99\% training accuracy and 96\% validation accuracy after being trained over four additional epochs. The model also performed much better on the testing data, yielding 97\% accuracy with reasonably high f1-scores for each class label. This was our breakthrough.
+With limited available computational resources, we also upgraded our pre-trained model to ResNet101, a more complex model compared to ResNet50. We employed the same structure as in the ResNet50 setup. The model was initially trained over 20 epochs with all ResNet101 layers frozen, yielding a training accuracy of 92\% and validation accuracy of 85\%. When the fine-tuning technique was applied (with the last 40 layers unfrozen), the model reached 99\% training accuracy and 96\% validation accuracy after being trained over four additional epochs. The model also performed much better on the testing data, yielding 97\% accuracy with reasonably high F1-scores for each class label. This was our breakthrough.
 
 By employing ResNet101 with layer-wise fine-tuning and a better dataset split, we ended up with a highly robust CNN model with consistent performance across training, validation, and testing data.
 
@@ -209,9 +211,9 @@ To develop other classifiers that incorporate algorithms rather than deep learni
 
 After conducting hyperparameter tuning, we obtained an overall accuracy of 96\% and 95\% for SVM and RF classifiers respectively. In general, these results demonstrate that classical classifiers, when paired with feature extractors, can deliver highly competitive performance for image classification, with significantly reduced training complexity.
 
-\section{\large Evaluation (1-2 pages)}
+\section{\large Evaluation (Complete)}
 
-\begin{table}[h!]
+\begin{table*}[!ht]
 \centering
 \caption{CNN Metrics}
 \begin{tabular}{lcccc}
@@ -226,9 +228,9 @@ pituitary  & 0.99 & 0.99 & 0.99 & 118 \\
 \textbf{Accuracy} \textbf{0.97} \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
-\begin{table}[h!]
+\begin{table*}[!ht]
 \centering
 \caption{SVM Metrics}
 \begin{tabular}{lcccc}
@@ -243,9 +245,9 @@ pituitary  & 0.98 & 0.98 & 0.98 & 118 \\
 \textbf{Accuracy} \textbf{0.96} \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
-\begin{table}
+\begin{table*}[!ht]
 \centering
 \caption{RF Metrics}
 \begin{tabular}{lcccc}
@@ -260,62 +262,86 @@ pituitary  & 0.97 & 0.98 & 0.98 & 118 \\
 \textbf{Accuracy} \textbf{0.95} \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
-In this project, three machine learning models—Convolutional Neural Networks (CNN), Support Vector Machines (SVM), and Random Forests (RF)—were trained and evaluated. In this section, the performance of these models are assessed using standard classification metrics, including accuracy, precision, recall, and F1 score. The dataset utilized for this evaluation consists of four classes: glioma, meningioma, pituitary tumor, and no tumor.
+As previously mentioned, we trained three machine learning models for this project: a CNN, an SVM, and an RF model. In this section, the performances of these models are assessed using standard classification metrics such as accuracy, precision, recall, and F1-score. 
 
-The CNN model demonstrated the highest overall accuracy at 96.68\%, followed closely by SVM at 95.66\%, and RF at 94.90\%. Macro and weighted F1-scores mirrored this trend, with CNN achieving 0.97, SVM 0.96, and RF 0.95 in both averages. These scores indicate that CNN not only achieves better overall classification performance but also maintains consistency across classes in terms of precision and recall.
+\vspace{1.5em}
 
-Diving into per-class specifics, we observe that for the label "glioma", CNN exhibited the highest precision (0.98) and recall (0.93), indicating strong identification capability with few false positives and a relatively low false negative rate. SVM matched CNN in precision (0.98) but had a lower recall (0.91), while RF also had a precision (0.98) but the lowest recall score at 0.89. This suggests that both SVM and RF are more likely to miss "glioma" cases compared to CNN while matching its precision.
+We can see from Tables 1, 2, and 3 that the CNN demonstrated the highest overall accuracy at 97\%, followed closely by the SVM at 96\%, and the RF at 95\%. The F1-scores of each model mirrored this trend, with the CNN achieving an average F1-score of 0.97, the SVM 0.96, and the RF 0.95. These scores indicate that the CNN not only achieves better overall classification performance, but also maintains consistency across classes in terms of precision and recall.
 
-In the case of "meningioma", while CNN had the best precision (0.93), SVM and RF had equal or superior recall (0.97 and 0.98 respectively) compared to CNN (0.97). SVM and RF had reduced precision (0.89 and 0.87) which is a notable difference from CNN's aforementioned score. This pattern indicates that SVM and RF are more sensitive in detecting "meningioma" but may yield more false positives than CNN.
+Diving into per-class metrics, again looking at the three tables, we observe that for the label ``glioma", all three models had an extremely high precision of 0.98, indicating very few false positives. In terms of recall, the CNN exhibited a score of 0.93, the SVM had a lower recall at 0.91, and the RF had the lowest recall at 0.89. These values highlight that both the SVM and the RF have higher false negative rates compared to the CNN for the ``glioma" class, meaning they classify glioma samples as other than glioma.
 
-In classifying "no tumor", RF achieved perfect precision (1.00), which means that every time RF predicted "no tumor", the model was correct. However, its recall (0.93) was the lowest among the three, pointing to a higher rate of false negatives. CNN balanced both precision (0.97) and recall (0.98) well, outperforming both alternatives in overall reliability for this class.
+In the case of the ``meningioma" class, while the CNN had the best precision at 0.93, the SVM and the RF had equal or superior recalls at 0.97 and 0.98 respectively, with the CNN at 0.97. The SVM and the RF had reduced precision scores at 0.89 and 0.87, which is a notable difference from the CNN's aforementioned score. This pattern indicates that the SVM and the RF saw more false positives, but equal or less false negatives. So if the goal was to reduce the number of ``meningioma" tumors classified as something else, the RF would be favorable by that 1\% difference we see in the recall scores. 
 
-For the label 'pituitary', all three models performed strongly, with CNN leading both in precision and recall (0.99 each). SVM and RF followed closely with both metrics at 0.98 and 0.97-0.98, respectively, indicating that all models are highly effective in classifying "pituitary" tumors.
+In classifying ``no tumor", the RF achieved perfect precision of 1.00, which means that every time RF predicted ``no tumor", the model was correct. However, its recall at 0.93 was the lowest among the three, pointing to a higher rate of false negatives. The CNN balanced both precision and recall well, at 0.97 and 0.98 respectively, outperforming both alternatives in overall reliability for this class.
 
-Unlike accuracy, which can be misleading if one class dominates the dataset, the F1 score provides a balanced view of the model's ability to correctly identify each class without favoring either false positives or false negatives. This makes it especially useful in medical imaging applications, where both types of errors can have serious implications for patient diagnosis and treatment.
+For the label ``pituitary'', all three models performed strongly, with the CNN leading both in precision and recall both at 0.99. The SVM and RF followed closely with both metrics at 0.98 and 0.97-0.98, respectively, indicating that all models are highly effective in classifying ``pituitary" tumors.
 
-The F1 score of 0.93 for glioma tumors. This score indicates that while the model performs well in identifying glioma cases, there is a notable trade-off between precision and recall, particularly with slightly reduced recall. This suggests the model may occasionally misclassify glioma tumors as other types or miss them altogether.
+Unlike accuracy, which can be misleading if one class dominates the dataset, the F1-score provides a balanced view of the model's ability to correctly identify each class without favoring either false positives or false negatives. This makes it especially useful in medical imaging applications, where both types of errors can have serious implications for patient diagnosis and treatment.
 
-The meningioma class has the lowest F1 score among all four classes with 0.92, indicating the greatest challenge for the model in this category. The score suggests a less favorable balance between precision and recall; either the model is producing more false positives, false negatives, or both. This could be due to visual overlap with other tumor types, particularly gliomas, or due to greater variability in meningioma imaging features. 
+Because the CNN is the best general model of the three, we will take these next few paragraphs to analyze its F1-scores and their meanings. The model's F1-score of 0.95 for glioma tumors indicates that while the model performs well in identifying most glioma cases, there is a notable trade-off between precision and recall. The reduced recall value suggests the model may occasionally misclassify glioma tumors as other types or miss them altogether.
 
-The F1 score of 0.97 for the no tumor class highlights the model’s strong performance in distinguishing healthy scans from non-healthy ones. The high precision and recall underlying this score indicate that the model rarely misclassifies healthy brains as tumors meaning there are a low amount of false positives and is also unlikely to miss the absence of a tumor or false negatives. This reliability is crucial in medical settings, where a false alarm can lead to unnecessary procedures, and a missed tumor can be life-threatening.
+The ``meningioma" class also has an F1-score of .95, indicating a very similar story, except this time in reverse. The model has a lower precision compared to recall, meaning the model tends to classify tumors as ``meningioma'' when in fact they are not. This could be due to visual overlap with other tumor types, particularly gliomas, or due to greater variability in meningioma imaging. 
 
-With the highest F1 score of 0.98, the model shows excellent performance in detecting pituitary tumors. This suggests that the pituitary tumor class is the most distinct or consistently represented in the dataset, allowing the model to make confident predictions. High F1 scores for both precision and recall indicate that pituitary tumors are both correctly identified and rarely confused with other classes. This robustness may stem from more uniform imaging patterns or stronger contrast features in this tumor type.
+The F1-score of 0.98 for the ``no tumor" class highlights the model's strong performance in distinguishing healthy scans from non-healthy ones. The high precision and recall underlying this score indicate that the model rarely misclassifies healthy brains as having a tumor (false negatives) and is also unlikely to miss the presence of a tumor (false positives). This reliability is crucial in medical settings, where a false alarm can lead to unnecessary procedures, and a missed tumor can be life-threatening.
 
-\section{\large Conclusion (1/2 page)}
+With the highest F1-score of 0.99, the model shows excellent performance in detecting pituitary tumors. This suggests that the ``pituitary" class is the most distinct or consistently represented in the dataset, allowing the model to make confident predictions. High scores for both precision and recall indicate that pituitary tumors are both correctly identified and rarely confused with other classes. This robustness may stem from more uniform imaging patterns or stronger contrast features in this tumor type.
 
-The above evaluation highlights CNN's strength in handling complex, high-dimensional image data, likely due to its hierarchical feature extraction capability. Its superior balance in both precision and recall in all tumor types supports its suitability for real-world clinical deployment, where false positives and false negatives carry significant risk.
+\section{\large Conclusion (Complete)}
 
-SVM performed comparably well, especially in the detection of meningioma and pituitary tumors, and may offer a lighter alternative in environments with limited computational resources. However, it showed reduced precision in some classes, which made it slightly less robust overall.
+The above evaluation highlights the convolutional neural network's strength in handling complex, high-dimensional image data, likely due to its hierarchical feature extraction capability. Its superior balance in both precision and recall in all tumor types supports its suitability for real-world clinical deployment, where false positives and false negatives carry significant risk.
 
-RF, while achieving remarkable precision, particularly for the "no tumor" class, exhibited reduced recall across multiple classes. This suggests a tendency to make fewer false positives, at the expense of missing actual tumor cases, which is a very serious and life-threatening issue in medical diagnostics.
+The support vector machine model performed comparably well, especially in the detection of meningioma and pituitary tumors, and may offer a lighter alternative in environments with limited computational resources. However, it showed reduced precision in some classes, which made it slightly less robust overall.
+
+The random forest model, while achieving remarkable precision, particularly for the ``no tumor" class, exhibited reduced recall across multiple classes. This suggests a tendency to make fewer false positives, at the expense of missing actual tumor cases, which, as said before, is a very serious and life-threatening issue in medical diagnostics.
+
+Simply because of the extreme high-stakes nature of brain tumor classification, none of these three models we presented should be used in real-world medical diagnosis or research. But if you had to choose one, the CNN is the clear winner. It was expected from the start given the reputation of CNNs as image classifiers, but we must admit the results of the SVM and RF models were much closer than we expected.
 
 \section{\large Our Team (1 page)}
 
-The link to this project's GitHub\textsuperscript{10} repository can be found in the references of this report. The repository holds our source code, the dataset, this report, and some more supplementary files. Please feel free to fork the repository and mess around with it as you wish.
-
-Project roadmap? Reference the first one pager outline assignment we did on google doc
-%TODO --- roadmap?
+Thank you for reading our paper. We had a great time researching, engineering, and writing up this project. The link to our GitHub\textsuperscript{10} repository can be found in the references of this report. The repository holds our source code, the dataset, this report, and some more supplementary files. Please feel free to fork the repository and mess around with it as you wish.
 
 \subsection{\large Demonstration}
 
 For those interested in seeing the model in action, a short five minute demonstration of our model can be found on YouTube\textsuperscript{11}. The demo briefly walks through how to use the model, how the frontend was developed, and how the model is invoked.
 
 \subsection{\large Roles and Contributions}
+\balance
 
-Joe: As the team leader, Joe took charge of logistics. He organized meetings, defined the roadmap for the project, and kept the team on track. He also lead the exploratory data anaylsis subproject, and was crucial to the creation of the final report. 
+\textbf{Joe}: As the team leader, Joe took charge of logistics. He organized meetings, defined the roadmap for the project, and kept the team on track. He also led the exploratory data anaylsis subproject, and was the main author of the final report. 
 
-Nam: Throughout the progression of the project, Nam was primarily responsible for the development and implementation of machine learning models. 
-Nam took over the experimental process to optimize each model, iteratively researching multiple architectures and frameworks to successfully develop models with different algorithms that are able to perform brain tumor detection at a relatively high accuracy. 
-In general, Nam’s contributions encompassed every stage of model development, from initial prototyping to completion of each model prior to final deployment, ensuring both technical robustness and adaptability to team-driven refinements.
+\textbf{Nam}: Throughout the project, Nam was primarily responsible for the development and implementation of the machine learning models. Nam took over the experimental process of optimizing each model, researching architectures and frameworks to successfully develop models with different algorithms. In general, Nam's contributions encompassed every stage of model development, from initial prototyping to completion.
 
-Jonathan: Jonathan took charge of literature review and researched techniques that can be implemented to the model. Jonathan was also responsible for writing the evaluation section that analyzed the performances of the models by talking about the evaluation metrics such as F1 scores, precision, and recall across the different classes. 
+\textbf{Jonathan}: Through literature review and careful research, Jonathan laid the groundwork for the project, finding out which techniques might be useful to us. Jonathan was also responsible for writing the evaluation section of the final report, analyzing the performances of each model by talking about the evaluation metrics such as F1-scores, precision, and recall.
 
-Richard: Richard contributed to the project by evaluating the performance of the three machine learning model using evaluation metrics such as accuracy, F1 score, precision, and recall. Based on these analyses, he provided the rationale for selecting the CNN model as the final model due to its superior performance relative to the alternatives. Additionally, he conducted a comprehensive literature review to summarize key developments in the field, which served as a foundational reference for the project. His contributions also included performing exploratory data analysis (EDA) and preparing the dataset for modeling through appropriate data preprocessing techniques.
+\textbf{Richard}: Richard contributed to the project by assessing the performance of the three machine learning models. Based on these analyses, he provided the rationale for selecting the CNN as the final model. Additionally, he conducted comprehensive literature review to summarize key developments in the field, which  like Jonathan's findings, served as a foundational reference for the project. 
 
-Aryan: Aryan completed a literature review and analyzed research papers to identify techniques we can use to address the models overfitting. In the next few weeks Aryan will continue working to improve the models accuracy while also working on documentation and reports. 
+\textbf{Aryan}: Aryan participated in group meetings, worked on literature reviews, and helped the group brainstorm ideas and find the dataset. Most importantly, he built and deployed the fullstack application, and recorded the demonstration video to go along with it. 
+
+\subsection{\large Project Timeline / Roadmap}
+
+- April 19: First team meeting, finding a dataset
+
+- April 25: One-pager project description 
+
+- May 01: Complete EDA
+
+- May 02: Initial model (42\% accuracy)
+
+- May 06: Mid-Quarter Report 
+
+- May 15: Model improvements (~80\% accuracy)
+
+- May 18: Dataset reorganization (95\% accuracy)
+
+- May 20: Began drafting final report
+
+- May 22: SVM and RF models implemented
+
+- May 24: Frontend developed
+
+- June 07: Final report complete
 
 \begin{thebibliography}{00}
 
@@ -347,11 +373,11 @@ A. M. Hasan, H. A. Jalab, F. Meziane, H. Kahtan, and A. S. Al-Ahmad, “Combinin
 R. Meier, A. P. de Mortanges, R. Wiest, and U. Knecht, “Exploratory analysis of qualitative MR imaging features for the differentiation of glioblastoma and brain metastases,” *Front. Oncol.*, vol. 10, p. 581037, 2020.
 
 \bibitem{Vogel2025}
-J. Vogel, N. Nguyen, J. Mo, A. Karnwal, R. Ho, "Neural Networks for Neural Tumors". GitHub. https://github.com/Coco501/Neural-Networks-
+J. Vogel, N. Nguyen, J. Mo, A. Karnwal, R. Ho, ``Neural Networks for Neural Tumors". GitHub. https://github.com/Coco501/Neural-Networks-
 for-Neural-Tumors
 
 \bibitem{Karnwal2025}
-A. Karnwal, "Brain Tumor Classification Application Demo". (2025), YouTube. https://www.youtube.com/watch?v=ECMGXgMrji0
+A. Karnwal, ``Brain Tumor Classification Application Demo". (2025), YouTube. https://www.youtube.com/watch?v=ECMGXgMrji0
 
 \end{thebibliography}
 
