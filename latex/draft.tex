@@ -51,7 +51,7 @@ Brain tumor classification, Convolutional Neural Network (CNN), MRI brain imager
 \end{IEEEkeywords}
 
 \large 
-\section{\large Introduction (Complete)}
+\section{\large Introduction}
 
 As a team of five young computer science students with no prior machine learning experience, we ambitously decided to tackle the real-world challenge of brain tumor classification. Through hours and hours of research and trial and error, we learned a lot, and we have a lot to share. 
 
@@ -73,7 +73,7 @@ A classification machine learning model is a great approach to this problem. Usi
 
 This project focuses on three general brain tumor classes: glioma, meningioma, and pituitary. Each class contains many of the 120+ tumor types mentioned before. The model will also have a ``no tumor" class. The aim for the model was to predict tumor classes with over 95\% accuracy.
 
-\section{\large Literature Review (Complete)}
+\section{\large Literature Review}
 
 \subsection{\large Brain Tumor Classification in MRI Image Using Convolutional Neural Network\textsuperscript{3}}
 
@@ -93,7 +93,7 @@ In this publication, authors Seetha and Raja demonstrate the effectiveness of co
 
 The authors implemented a deeper architecture design using small kernels, with neuron weights intentionally kept small to optimize performance. Their experimental results demonstrated that their CNN model outperformed other state-of-the-art methods in both accuracy and efficiency. Like our approach, they used a dataset containing various brain MRI scans and faced similar challenges with image preprocessing. Their optimization of kernel size and weight parameters offers valuable insights for our model development. Given that our initial prototype showed signs of overfitting (93\% training accuracy with 42\% testing accuracy), we should consider implementing some of the suggested architectural decisions regarding smaller kernels and weight optimizations, while continuing with our planned transfer learning approach to improve generalization.
 
-\section{\large Dataset Description (Complete)}
+\section{\large Dataset Description}
 
 The dataset used for this project comes from a group of brilliant students at Savitribai Phule Pune University in India. It is an open source dataset that can be found for free on Kaggle\textsuperscript{6}. The dataset is reviewed and well respected. It consists of 3264 labeled MRI scan images. Like hinted at before, the images are divided into four categories: three different tumor types, and one set of “no tumor” scans. Because each image in our dataset is already labeled, our model's training is considered supervised, as opposed to unsupervised. An unsupervised model would require a much different approach, most likely using different algorithms.
 
@@ -103,42 +103,7 @@ Due to the non-numerical nature of image datasets, our input features come in a 
 
 As explained under `Literature Review', preprocessing steps might include techniques like image resizing, cropping, normalization, data augmentation (rotating, flipping, zooming), and more. Going even further, the `skull stripping' technique mentioned by Farooq et al.\textsuperscript{4} can be used to isolate the brain tissue in an MRI scan. This is helpful for training a model, since we do not care about the skull or fat in the scans, it is considered noise. We do not want the model to train on those ``features" of the image.
 
-\section{\large Exploratory Data Analysis (1 page)}
-% TODO: Complete but need to fix image placement so that EDA is on one consistent page
-
-% EXAMPLE image in a column
-% \begin{figure}[!ht]
-%     \centering
-%     \includegraphics[width=2in]{coconut.png}
-%     \caption{this is a coconut}
-%     \label{test image coconut}
-% \end{figure}
-
-% EXAMPLE image across two columns
-% \begin{figure*}[!ht]
-%     \centering
-%     \includegraphics[width=3in]{coconut.png}
-%     \caption{this is a coconut}
-%     \label{coconut}
-% \end{figure*}
-
-% These two won't stay in the same row
-% \begin{figure*}[!ht]
-%     \centering
-%     \includegraphics[width=1in]{ImagesPerClassTraining.png}
-%     \caption{\large Images in the training dataset}
-%     \label{Number of images per class in the training dataset}
-% \end{figure*}
-
-% \begin{figure*}[!ht]
-%     \centering
-%     \includegraphics[width=1in]{ImagesPerClassTesting.png}
-%     \caption{\large Images in the testing dataset}
-%     \label{Number of images per class in the testing dataset}
-% \end{figure*}
-
-% Both figures in one row
-% TODO: Move these to be under EDA in the right spots
+\section{\large Exploratory Data Analysis}
 \begin{figure*}[!ht]
     \centering
     \includegraphics[width=0.49\textwidth]{ImagesPerClassTraining.png}
@@ -161,7 +126,7 @@ Shifting our focus toward the testing dataset, again looking at \textit{Figure 1
 
 Taking a look at Figure 2, again on the next page, we can see that the dataset is comprised of images of many varying sizes. There is a concentration around the 200x200 and 500x500 sizes. With this information, we know we will have to perform some image pre-processing to convert all images into the same size so the model has consistent input. 
 
-\section{\large Methodology (Complete)}
+\section{\large Methodology}
 
 \subsection{\large Feature Selection}
 
@@ -179,7 +144,7 @@ Our first prototype model was a CNN with four convolutional blocks, followed by 
 
 To improve upon the first model, we applied k-fold cross validation and tuned hyperparameters such as dropout rate, number of layers, number of neurons, etc. This was the first time we used grid search to tune hyperparameters. It was also at this stage we decided that going forward, we would use transfer learning to reduce the number of learned parameters and implicitly filter irrelevant `features'. Transfer learning, which is the process of leveraging a pre-trained model to improve your own, can greatly reduce overfitting risks. From this point on, we used PyTorch. Pytorch gave us more flexibility in controlling forward pass, backpropagation, and optimization, allowing us to develop a better-fitting CNN model.
 
-\section{\large Experimental Results (Complete)}
+\section{\large Experimental Results}
 
 Neural networks like CNNs are very good at detecting features and learning patterns in data. Because of this, we can leverage deep learning to preprocess data, and then use that data to train other models. So far, this report has focused on developing a CNN model with high accuracy by iteratively refining both model architecture and training strategy. While CNNs are the most common algorithm choice for image classification, they are not the only option. Image classification can be done by various other algorithms, including support vector machine (SVM), and random forest (RF). 
 
@@ -211,7 +176,7 @@ To develop other classifiers that incorporate algorithms rather than deep learni
 
 After conducting hyperparameter tuning, we obtained an overall accuracy of 96\% and 95\% for SVM and RF classifiers respectively. In general, these results demonstrate that classical classifiers, when paired with feature extractors, can deliver highly competitive performance for image classification, with significantly reduced training complexity.
 
-\section{\large Evaluation (Complete)}
+\section{\large Evaluation}
 
 \begin{table*}[!ht]
 \centering
@@ -288,7 +253,7 @@ The F1-score of 0.98 for the ``no tumor" class highlights the model's strong per
 
 With the highest F1-score of 0.99, the model shows excellent performance in detecting pituitary tumors. This suggests that the ``pituitary" class is the most distinct or consistently represented in the dataset, allowing the model to make confident predictions. High scores for both precision and recall indicate that pituitary tumors are both correctly identified and rarely confused with other classes. This robustness may stem from more uniform imaging patterns or stronger contrast features in this tumor type.
 
-\section{\large Conclusion (Complete)}
+\section{\large Conclusion}
 
 The above evaluation highlights the convolutional neural network's strength in handling complex, high-dimensional image data, likely due to its hierarchical feature extraction capability. Its superior balance in both precision and recall in all tumor types supports its suitability for real-world clinical deployment, where false positives and false negatives carry significant risk.
 
@@ -298,7 +263,7 @@ The random forest model, while achieving remarkable precision, particularly for 
 
 Simply because of the extreme high-stakes nature of brain tumor classification, none of these three models we presented should be used in real-world medical diagnosis or research. But if you had to choose one, the CNN is the clear winner. It was expected from the start given the reputation of CNNs as image classifiers, but we must admit the results of the SVM and RF models were much closer than we expected.
 
-\section{\large Our Team (1 page)}
+\section{\large Our Team}
 
 Thank you for reading our paper. We had a great time researching, engineering, and writing up this project. The link to our GitHub\textsuperscript{10} repository can be found in the references of this report. The repository holds our source code, the dataset, this report, and some more supplementary files. Please feel free to fork the repository and mess around with it as you wish.
 
@@ -315,7 +280,7 @@ For those interested in seeing the model in action, a short five minute demonstr
 
 \textbf{Jonathan}: Through literature review and careful research, Jonathan laid the groundwork for the project, finding out which techniques might be useful to us. Jonathan was also responsible for writing the evaluation section of the final report, analyzing the performances of each model by talking about the evaluation metrics such as F1-scores, precision, and recall.
 
-\textbf{Richard}: Richard contributed to the project by assessing the performance of the three machine learning models. Based on these analyses, he provided the rationale for selecting the CNN as the final model. Additionally, he conducted comprehensive literature review to summarize key developments in the field, which  like Jonathan's findings, served as a foundational reference for the project. 
+\textbf{Richard}: Richard contributed to the project by assessing the performance of the three machine learning models. Based on these analyses, he provided the rationale for selecting the CNN as the final model. Additionally, he conducted comprehensive literature review to summarize key developments in the field which served as a foundational reference for the project. 
 
 \textbf{Aryan}: Aryan participated in group meetings, worked on literature reviews, and helped the group brainstorm ideas and find the dataset. Most importantly, he built and deployed the fullstack application, and recorded the demonstration video to go along with it. 
 
